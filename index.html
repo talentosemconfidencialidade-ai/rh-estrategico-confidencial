@@ -643,6 +643,8 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
     </div>
  
     <form id="fitForm" action="https://formspree.io/f/xjgpvvgw" method="POST">
+      <input type="hidden" name="_subject" value="Novo Fit Cultural — Coordenador(a) de RH Estratégico">
+      <input type="hidden" name="_language" value="pt">
       <input type="hidden" name="B1_Q1_tempo_rh"              id="h_q1">
       <input type="hidden" name="B1_Q2_liderou_equipe"         id="h_q2">
       <input type="hidden" name="B1_Q3_estruturou_zero"        id="h_q3">
@@ -879,33 +881,65 @@ function collectAnswers(){
 document.getElementById('fitForm').addEventListener('submit', async function(e){
   e.preventDefault();
  
-  // Validate LGPD
-  if(!document.getElementById('lgpd_consent').checked){
-    document.getElementById('lgpd_consent').closest('.lgpd-block').style.border = '1.5px solid var(--orange)';
+  // Validação LGPD
+  const lgpd = document.getElementById('lgpd_consent');
+  if(!lgpd.checked){
+    lgpd.closest('.lgpd-block').style.border = '2px solid var(--orange)';
+    lgpd.closest('.lgpd-block').scrollIntoView({behavior:'smooth', block:'center'});
     return;
   }
  
+  // Popula campos hidden com respostas dos blocos anteriores
   collectAnswers();
-  const btn=document.getElementById('submitBtn');
+ 
+  // Preenche _replyto com o email do candidato (Formspree usa para resposta)
+  const emailField = this.querySelector('[name="email"]');
+  if(emailField){
+    const replyTo = document.createElement('input');
+    replyTo.type = 'hidden';
+    replyTo.name = '_replyto';
+    replyTo.value = emailField.value;
+    this.appendChild(replyTo);
+  }
+ 
+  const btn = document.getElementById('submitBtn');
   btn.classList.add('loading');
-  try{
-    const res=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
+ 
+  const formData = new FormData(this);
+  const action = this.action;
+ 
+  try {
+    const res = await fetch(action, {
+      method: 'POST',
+      body: formData,
+      headers: { 'Accept': 'application/json' }
+    });
+ 
     if(res.ok){
-      document.querySelectorAll('.form-step').forEach(el=>el.classList.remove('active'));
+      // Sucesso
+      document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
       document.getElementById('success').classList.add('show');
-      document.getElementById('footerNote').style.display='none';
-      window.scrollTo({top:0,behavior:'smooth'});
+      document.getElementById('footerNote').style.display = 'none';
+      window.scrollTo({top:0, behavior:'smooth'});
     } else {
-      const json = await res.json().catch(()=>({}));
-      const msg = json?.errors?.map(e=>e.message).join('. ') || 'Verifique se o endpoint Formspree está configurado corretamente.';
-      alert('Erro ao enviar: '+msg);
+      // Tenta ler o erro do Formspree
+      let detail = 'Status HTTP: ' + res.status;
+      try {
+        const json = await res.json();
+        if(json && json.errors) detail = json.errors.map(e => e.message).join(' | ');
+        else if(json && json.error) detail = json.error;
+      } catch(_){}
+      console.error('[Formspree] Erro:', detail);
+      alert('Não foi possível enviar.\n\n' + detail + '\n\nSe o erro persistir, entre em contato diretamente com o recrutador.');
       btn.classList.remove('loading');
     }
   } catch(err) {
-    alert('Erro de conexão. Verifique sua internet e tente novamente.');
+    console.error('[Formspree] Exceção:', err);
+    alert('Erro de conexão ao enviar o formulário.\n\nVerifique sua internet e tente novamente.\n\n(' + err.message + ')');
     btn.classList.remove('loading');
   }
 });
 </script>
 </body>
 </html>
+ 
