@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Avaliação de Fit Cultural | Vaga Confidencial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy:      #0B2545;
+  --navy-mid:  #13335E;
+  --navy-soft: #1C4070;
+  --blue-line: rgba(255,255,255,0.08);
+  --orange:    #F15A22;
+  --orange-2:  #D94C15;
+  --orange-dim:rgba(241,90,34,0.10);
+  --orange-bdr:rgba(241,90,34,0.25);
+  --white:     #FFFFFF;
+  --off:       #F8F7F5;
+  --surface:   #F0EEE9;
+  --border:    #E2DFD9;
+  --border-md: #CECCCA;
+  --ink:       #1C1A18;
+  --ink-soft:  #403D38;
+  --ink-muted: #7A7772;
+  --ink-faint: #B0ADA8;
+  --radius:    8px;
+  --radius-lg: 12px;
+  --ease:      cubic-bezier(0.4,0,0.2,1);
+  --D: #C0392B;
+  --I: #E67E22;
+  --S: #27AE60;
+  --C: #2980B9;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-weight:400;line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;}
+
+/* ─── LAYOUT ─── */
+.layout{display:grid;grid-template-columns:1fr;min-height:100vh;}
+@media(min-width:960px){.layout{grid-template-columns:320px 1fr;}}
+
+/* ─── SIDEBAR ─── */
+.sidebar{
+  background:var(--navy);color:var(--white);
+  padding:40px 28px 48px;
+  display:flex;flex-direction:column;gap:0;
+  position:relative;overflow:hidden;
+}
+.sidebar::before{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border:40px solid rgba(241,90,34,0.12);border-radius:50%;pointer-events:none;}
+.sidebar::after{content:'';position:absolute;bottom:-40px;left:-60px;width:180px;height:180px;border:28px solid rgba(255,255,255,0.04);border-radius:50%;pointer-events:none;}
+@media(min-width:960px){.sidebar{position:sticky;top:0;height:100vh;overflow-y:auto;}}
+.sidebar-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:5px 13px;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.55);margin-bottom:28px;width:fit-content;}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--orange);flex-shrink:0;}
+.sidebar-heading{font-family:'Syne',sans-serif;font-size:1.45rem;font-weight:700;line-height:1.25;color:var(--white);margin-bottom:8px;position:relative;z-index:1;}
+.sidebar-role{font-size:13px;color:rgba(255,255,255,0.45);margin-bottom:32px;position:relative;z-index:1;}
+.sinfo{display:flex;flex-direction:column;gap:0;position:relative;z-index:1;}
+.sinfo-item{padding:14px 0;border-bottom:1px solid var(--blue-line);}
+.sinfo-item:last-child{border-bottom:none;}
+.sinfo-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--orange);margin-bottom:4px;}
+.sinfo-text{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.55;}
+.step-nav{margin-top:36px;display:flex;flex-direction:column;gap:2px;position:relative;z-index:1;}
+.snav-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:6px;font-size:12.5px;color:rgba(255,255,255,0.38);font-weight:400;transition:all 0.3s var(--ease);}
+.snav-item.active{background:rgba(241,90,34,0.15);color:rgba(255,255,255,0.9);font-weight:600;}
+.snav-item.done{color:rgba(255,255,255,0.55);}
+.snav-num{width:21px;height:21px;border-radius:50%;border:1.5px solid rgba(255,255,255,0.18);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;color:rgba(255,255,255,0.3);flex-shrink:0;transition:all 0.3s var(--ease);}
+.snav-item.active .snav-num{background:var(--orange);border-color:var(--orange);color:white;}
+.snav-item.done .snav-num{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.2);color:rgba(255,255,255,0.5);}
+.snav-item.done .snav-num::before{content:'✓';font-size:10px;}
+.snav-item.done .snav-n{display:none;}
+.mobile-progress{background:var(--navy);padding:16px 20px;display:flex;align-items:center;gap:12px;}
+@media(min-width:960px){.mobile-progress{display:none;}}
+.prog-track{flex:1;height:3px;background:rgba(255,255,255,0.15);border-radius:2px;overflow:hidden;}
+.prog-fill{height:100%;background:var(--orange);border-radius:2px;transition:width 0.5s var(--ease);width:17%;}
+.prog-label{font-size:11.5px;color:rgba(255,255,255,0.5);white-space:nowrap;}
+@media(max-width:959px){.sidebar{padding:28px 20px 24px;}.step-nav{display:none;}.sinfo{display:none;}}
+
+/* ─── MAIN ─── */
+.main{padding:48px 28px 80px;max-width:700px;}
+@media(min-width:640px){.main{padding:52px 48px 80px;}}
+.form-step{display:none;animation:stepIn 0.45s var(--ease) both;}
+.form-step.active{display:block;}
+@keyframes stepIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+
+/* ─── STEP HEADER ─── */
+.step-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
+.step-tag::before{content:'';display:block;width:20px;height:2px;background:var(--orange);border-radius:1px;}
+.step-h{font-family:'Syne',sans-serif;font-size:clamp(1.65rem,3.5vw,2.1rem);font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:10px;}
+.step-desc{font-size:14.5px;color:var(--ink-muted);margin-bottom:36px;line-height:1.7;max-width:520px;}
+
+/* ─── QUESTION ─── */
+.qb{margin-bottom:28px;}
+.qlabel{display:block;font-size:14.5px;font-weight:500;color:var(--ink);margin-bottom:13px;line-height:1.5;}
+.qlabel .qnum{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--navy);color:white;border-radius:50%;font-size:11px;font-weight:700;margin-right:9px;flex-shrink:0;vertical-align:middle;position:relative;top:-1px;}
+
+/* ─── OPTIONS ─── */
+.opts{display:grid;gap:7px;}
+.opts.g2{grid-template-columns:1fr 1fr;}
+@media(max-width:520px){.opts.g2{grid-template-columns:1fr;}}
+.oc{position:relative;}
+.oc input[type="radio"],.oc input[type="checkbox"]{position:absolute;opacity:0;width:0;height:0;}
+.oc label{display:flex;align-items:flex-start;gap:11px;padding:13px 15px;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer;font-size:13.5px;color:var(--ink-soft);line-height:1.45;transition:border-color 0.25s var(--ease),background 0.25s var(--ease),color 0.25s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.oc label:hover{border-color:var(--orange-bdr);background:var(--orange-dim);color:var(--ink);}
+.oc input:checked+label{border-color:var(--orange);background:var(--orange-dim);color:var(--ink);font-weight:500;}
+.omark{width:16px;height:16px;border:1.5px solid var(--border-md);border-radius:50%;flex-shrink:0;margin-top:1px;transition:all 0.22s var(--ease);display:flex;align-items:center;justify-content:center;background:white;}
+.oc input:checked+label .omark{background:var(--orange);border-color:var(--orange);}
+.oc input:checked+label .omark::after{content:'';display:block;width:5px;height:5px;background:white;border-radius:50%;}
+
+/* ─── SCALE ─── */
+.scale-box{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.scale-ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-muted);margin-bottom:12px;font-weight:500;}
+.scale-opts{display:flex;gap:6px;}
+.so{flex:1;position:relative;}
+.so input{position:absolute;opacity:0;width:0;height:0;}
+.so label{display:flex;align-items:center;justify-content:center;height:40px;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-muted);transition:all 0.25s var(--ease);background:var(--surface);}
+.so label:hover{border-color:var(--orange-bdr);color:var(--orange);background:var(--orange-dim);}
+.so input:checked+label{background:var(--orange);border-color:var(--orange);color:white;}
+
+/* ─── TEXTAREA / INPUT ─── */
+.tfield{width:100%;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:13px 15px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;resize:vertical;transition:border-color 0.25s var(--ease);min-height:88px;line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.tfield::placeholder{color:var(--ink-faint);}
+.tfield:focus{border-color:var(--orange);}
+.ifield{width:100%;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 14px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;transition:border-color 0.25s var(--ease);box-shadow:0 1px 3px rgba(0,0,0,0.04);}
+.ifield::placeholder{color:var(--ink-faint);}
+.ifield:focus{border-color:var(--orange);}
+.igrid{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+@media(max-width:520px){.igrid{grid-template-columns:1fr;}}
+.fwrap{display:flex;flex-direction:column;gap:6px;}
+.flbl{font-size:11.5px;font-weight:600;color:var(--ink-soft);letter-spacing:0.05em;text-transform:uppercase;}
+.req{color:var(--orange);}
+
+/* ─── SCENARIO ─── */
+.scene{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
+.scene-top{padding:16px 20px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(11,37,69,0.03) 0%,rgba(241,90,34,0.03) 100%);}
+.scene-label{font-size:10.5px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--navy-soft);display:flex;align-items:center;gap:7px;margin-bottom:7px;}
+.scene-label::before{content:'';display:block;width:12px;height:2px;background:var(--orange);border-radius:1px;}
+.scene-q{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
+.scene-body{padding:14px 18px;}
+
+/* ─── REFLECT CARD ─── */
+.reflect-card{background:linear-gradient(135deg,rgba(11,37,69,0.04),rgba(241,90,34,0.03));border:1px solid rgba(11,37,69,0.1);border-left:3px solid var(--navy);border-radius:var(--radius);padding:15px 17px;font-size:13px;color:var(--ink-soft);line-height:1.6;margin-bottom:12px;}
+.reflect-card strong{color:var(--navy);font-weight:600;}
+
+/* ─── DIVIDER ─── */
+.qdiv{display:flex;align-items:center;gap:12px;margin:32px 0 20px;}
+.qdiv-label{font-size:10.5px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--navy-soft);white-space:nowrap;}
+.qdiv-line{flex:1;height:1px;background:var(--border);}
+
+/* ─── NAV BUTTONS ─── */
+.navrow{display:flex;align-items:center;gap:10px;margin-top:36px;padding-top:24px;border-top:1px solid var(--border);}
+.btn{padding:13px 24px;border-radius:var(--radius);font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.25s var(--ease);}
+.btn-back{background:var(--white);border:1.5px solid var(--border);color:var(--ink-soft);}
+.btn-back:hover{border-color:var(--border-md);color:var(--ink);}
+.btn-next{background:var(--orange);color:white;flex:1;justify-content:center;}
+.btn-next:hover{background:var(--orange-2);transform:translateY(-1px);box-shadow:0 6px 20px rgba(241,90,34,0.28);}
+.btn-next:active{transform:translateY(0);}
+.btn-navy{background:var(--navy);color:white;flex:1;justify-content:center;}
+.btn-navy:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 6px 20px rgba(11,37,69,0.28);}
+
+/* ─── PRIVACY NOTE ─── */
+.privacy-note{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;background:rgba(11,37,69,0.04);border:1px solid rgba(11,37,69,0.1);border-left:3px solid var(--navy);border-radius:var(--radius);font-size:12.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:28px;}
+
+/* ══════════════════════════════════════
+   DISC RESULT SCREEN
+══════════════════════════════════════ */
+#step-disc {display:none;}
+#step-disc.active {display:block;}
+
+.disc-hero{
+  text-align:center;
+  padding:8px 0 32px;
+  border-bottom:1px solid var(--border);
+  margin-bottom:32px;
+}
+
+.disc-badge-wrap{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+.disc-letter{
+  width:80px;height:80px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Syne',sans-serif;
+  font-size:2.4rem;font-weight:800;
+  color:white;
+  box-shadow:0 8px 28px rgba(0,0,0,0.18);
+  transition:transform 0.4s var(--ease);
+  animation:popIn 0.5s 0.2s var(--ease) both;
+}
+@keyframes popIn{from{opacity:0;transform:scale(0.6);}to{opacity:1;transform:scale(1);}}
+
+.disc-profile-name{
+  font-family:'Syne',sans-serif;
+  font-size:1.7rem;font-weight:700;
+  color:var(--ink);
+  margin-bottom:6px;
+}
+
+.disc-profile-sub{
+  font-size:14px;color:var(--ink-muted);
+  line-height:1.6;max-width:460px;margin:0 auto;
+}
+
+/* bars */
+.disc-bars{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:32px;
+}
+@media(max-width:520px){.disc-bars{grid-template-columns:1fr;}}
+
+.disc-bar-block{}
+.disc-bar-header{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:7px;
+}
+.disc-bar-label{
+  display:flex;align-items:center;gap:8px;
+  font-size:12.5px;font-weight:600;color:var(--ink-soft);
+}
+.disc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.disc-bar-pct{font-size:12px;font-weight:700;color:var(--ink-soft);}
+.disc-track{height:8px;background:var(--surface);border-radius:4px;overflow:hidden;}
+.disc-fill{height:100%;border-radius:4px;transition:width 1s var(--ease);width:0;}
+
+/* profile cards */
+.disc-traits{
+  background:var(--white);
+  border:1.5px solid var(--border);
+  border-radius:var(--radius-lg);
+  padding:24px;
+  margin-bottom:28px;
+}
+.disc-traits-title{
+  font-size:11px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;
+  color:var(--orange);margin-bottom:16px;
+}
+.disc-traits-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+}
+@media(max-width:480px){.disc-traits-grid{grid-template-columns:1fr;}}
+
+.trait-item{
+  display:flex;align-items:center;gap:9px;
+  font-size:13px;color:var(--ink-soft);
+  padding:9px 12px;
+  background:var(--off);
+  border-radius:6px;
+  border:1px solid var(--border);
+}
+.trait-check{
+  width:16px;height:16px;
+  border-radius:50%;
+  background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  font-size:9px;color:white;font-weight:700;
+}
+
+/* attention box */
+.disc-alert{
+  background:rgba(241,90,34,0.06);
+  border:1px solid var(--orange-bdr);
+  border-left:3px solid var(--orange);
+  border-radius:var(--radius);
+  padding:14px 16px;
+  font-size:13px;color:var(--ink-soft);line-height:1.6;
+  margin-bottom:28px;
+}
+.disc-alert strong{color:var(--orange-2);font-weight:600;}
+
+/* disclaimer */
+.disc-disclaimer{
+  font-size:12px;color:var(--ink-faint);
+  text-align:center;line-height:1.6;
+  margin-bottom:24px;
+}
+
+/* ─── SUBMIT ─── */
+.btn-submit{background:var(--navy);color:white;width:100%;justify-content:center;padding:16px;font-size:15px;border-radius:10px;position:relative;overflow:hidden;}
+.btn-submit::before{content:'';position:absolute;right:-20px;top:-20px;width:80px;height:80px;background:rgba(241,90,34,0.15);border-radius:50%;transition:transform 0.4s var(--ease);}
+.btn-submit:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 8px 28px rgba(11,37,69,0.3);}
+.btn-submit:hover::before{transform:scale(2.5);}
+.btn-submit.loading{opacity:.7;pointer-events:none;}
+.spinner{width:16px;height:16px;border:2px solid rgba(255,255,255,0.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;display:none;}
+.btn-submit.loading .btn-text{display:none;}
+.btn-submit.loading .spinner{display:inline-block;}
+@keyframes spin{to{transform:rotate(360deg);}}
+
+/* ─── SUCCESS ─── */
+.success-screen{display:none;text-align:center;padding:60px 20px;animation:stepIn 0.6s var(--ease) both;}
+.success-screen.show{display:block;}
+.success-mark{width:72px;height:72px;background:var(--navy);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 24px;font-family:'Syne',sans-serif;font-size:22px;color:var(--orange);font-weight:800;}
+.success-screen h2{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:700;color:var(--ink);margin-bottom:8px;}
+.success-bar{width:48px;height:3px;background:var(--orange);border-radius:2px;margin:16px auto 20px;}
+.success-screen p{font-size:15px;color:var(--ink-muted);line-height:1.75;max-width:420px;margin:0 auto;}
+.success-screen strong{color:var(--navy);}
+
+.footer{text-align:center;font-size:11.5px;color:var(--ink-faint);padding-top:28px;border-top:1px solid var(--border);margin-top:48px;line-height:1.6;}
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ═══════ SIDEBAR ═══════ -->
+<aside class="sidebar">
+  <div class="sidebar-badge"><span class="badge-dot"></span>Processo Seletivo Confidencial</div>
+  <div class="sidebar-heading">Avaliação de<br>Fit Cultural</div>
+  <div class="sidebar-role">Coordenador(a) de RH Estratégico</div>
+  <div class="sinfo">
+    <div class="sinfo-item"><div class="sinfo-label">Sobre esta etapa</div><div class="sinfo-text">Não há respostas certas. Queremos entender quem você realmente é como profissional.</div></div>
+    <div class="sinfo-item"><div class="sinfo-label">Tempo estimado</div><div class="sinfo-text">Entre 15 e 20 minutos. Responda com calma e autenticidade.</div></div>
+    <div class="sinfo-item"><div class="sinfo-label">Confidencialidade</div><div class="sinfo-text">Seus dados são usados exclusivamente neste processo. A empresa será revelada na entrevista.</div></div>
+  </div>
+  <nav class="step-nav" id="stepNav">
+    <div class="snav-item active"><span class="snav-num"><span class="snav-n">1</span></span>Perfil Profissional</div>
+    <div class="snav-item"><span class="snav-num"><span class="snav-n">2</span></span>Cultura e Comportamento</div>
+    <div class="snav-item"><span class="snav-num"><span class="snav-n">3</span></span>Relações e Ética</div>
+    <div class="snav-item"><span class="snav-num"><span class="snav-n">4</span></span>Cenários Práticos</div>
+    <div class="snav-item"><span class="snav-num"><span class="snav-n">5</span></span>Seu Perfil DISC</div>
+    <div class="snav-item"><span class="snav-num"><span class="snav-n">6</span></span>Seus Dados</div>
+  </nav>
+</aside>
+
+<!-- ═══════ MAIN ═══════ -->
+<main class="main">
+  <div class="mobile-progress">
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <span class="prog-label" id="progLabel">Bloco 1 de 6</span>
+  </div>
+
+  <!-- ══════ BLOCO 1 ══════ -->
+  <div class="form-step active" id="step-0">
+    <div class="step-tag">Bloco 1 de 6</div>
+    <h1 class="step-h">Perfil<br>Profissional</h1>
+    <p class="step-desc">Queremos entender sua trajetória e como você se posiciona hoje na área de Pessoas.</p>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">1</span>Há quanto tempo você atua em RH estratégico?</label>
+      <div class="opts g2">
+        <div class="oc"><input type="radio" name="q1" id="q1a" value="1-3 anos"><label for="q1a"><span class="omark"></span>1 a 3 anos</label></div>
+        <div class="oc"><input type="radio" name="q1" id="q1b" value="3-6 anos"><label for="q1b"><span class="omark"></span>3 a 6 anos</label></div>
+        <div class="oc"><input type="radio" name="q1" id="q1c" value="6-10 anos"><label for="q1c"><span class="omark"></span>6 a 10 anos</label></div>
+        <div class="oc"><input type="radio" name="q1" id="q1d" value="Mais de 10 anos"><label for="q1d"><span class="omark"></span>Mais de 10 anos</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">2</span>Já liderou equipe de RH formalmente?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q2" id="q2a" value="Sim, equipe de 1 a 3 pessoas"><label for="q2a"><span class="omark"></span>Sim, equipe de 1 a 3 pessoas</label></div>
+        <div class="oc"><input type="radio" name="q2" id="q2b" value="Sim, equipe de 4 ou mais pessoas"><label for="q2b"><span class="omark"></span>Sim, equipe de 4 ou mais pessoas</label></div>
+        <div class="oc"><input type="radio" name="q2" id="q2c" value="Não formalmente, mas com influência lateral"><label for="q2c"><span class="omark"></span>Não formalmente, mas com influência lateral</label></div>
+        <div class="oc"><input type="radio" name="q2" id="q2d" value="Ainda não liderei equipe"><label for="q2d"><span class="omark"></span>Ainda não liderei equipe</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">3</span>Já estruturou uma área de RH do zero ou em fase inicial?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q3" id="q3a" value="Sim, liderando o processo"><label for="q3a"><span class="omark"></span>Sim, liderando o processo</label></div>
+        <div class="oc"><input type="radio" name="q3" id="q3b" value="Sim, como parte da equipe"><label for="q3b"><span class="omark"></span>Sim, como parte da equipe</label></div>
+        <div class="oc"><input type="radio" name="q3" id="q3c" value="Ainda não, mas tenho preparo para isso"><label for="q3c"><span class="omark"></span>Ainda não, mas tenho preparo para isso</label></div>
+        <div class="oc"><input type="radio" name="q3" id="q3d" value="Não tenho essa experiência"><label for="q3d"><span class="omark"></span>Não tenho essa experiência</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">4</span>Como você se posiciona hoje como profissional de Pessoas?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q4" id="q4a" value="Parceiro de negócio, atuo junto à liderança nas decisões"><label for="q4a"><span class="omark"></span>Parceiro de negócio, atuo junto à liderança nas decisões</label></div>
+        <div class="oc"><input type="radio" name="q4" id="q4b" value="Misto, oscilo entre estratégico e operacional"><label for="q4b"><span class="omark"></span>Misto, oscilo entre estratégico e operacional</label></div>
+        <div class="oc"><input type="radio" name="q4" id="q4c" value="Majoritariamente operacional, em transição para o estratégico"><label for="q4c"><span class="omark"></span>Majoritariamente operacional, em transição para o estratégico</label></div>
+      </div>
+    </div>
+
+    <div class="navrow">
+      <button class="btn btn-next" onclick="nextStep()">Próximo bloco &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══════ BLOCO 2 ══════ -->
+  <div class="form-step" id="step-1">
+    <div class="step-tag">Bloco 2 de 6</div>
+    <h1 class="step-h">Cultura e<br>Comportamento</h1>
+    <p class="step-desc">Este bloco mapeia como você age no dia a dia diante de desafios, mudanças e oportunidades.</p>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">5</span>Você está em um projeto importante e encontra um obstáculo significativo no meio do caminho. Qual é sua reação natural?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q5" id="q5a" value="Redesenho o caminho e sigo. Obstáculos fazem parte do processo" data-disc="D:2,C:1"><label for="q5a"><span class="omark"></span>Redesenho o caminho e sigo. Obstáculos fazem parte do processo</label></div>
+        <div class="oc"><input type="radio" name="q5" id="q5b" value="Busco suporte imediatamente. Não faz sentido avançar sozinho" data-disc="S:2,I:1"><label for="q5b"><span class="omark"></span>Busco suporte imediatamente. Não faz sentido avançar sozinho</label></div>
+        <div class="oc"><input type="radio" name="q5" id="q5c" value="Faço uma pausa, analiso profundamente e volto com solução estruturada" data-disc="C:2,S:1"><label for="q5c"><span class="omark"></span>Faço uma pausa, analiso profundamente e volto com solução estruturada</label></div>
+        <div class="oc"><input type="radio" name="q5" id="q5d" value="Escalo para a liderança. Preciso de direcionamento antes de avançar" data-disc="S:2"><label for="q5d"><span class="omark"></span>Escalo para a liderança. Preciso de direcionamento antes de avançar</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">6</span>Quando a empresa muda uma diretriz que você ajudou a construir, como você reage?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q6" id="q6a" value="Aceito bem. Contexto muda e processos precisam acompanhar" data-disc="S:2,I:1"><label for="q6a"><span class="omark"></span>Aceito bem. Contexto muda e processos precisam acompanhar</label></div>
+        <div class="oc"><input type="radio" name="q6" id="q6b" value="Questiono antes de aceitar. Preciso entender o racional da mudança" data-disc="C:2,D:1"><label for="q6b"><span class="omark"></span>Questiono antes de aceitar. Preciso entender o racional da mudança</label></div>
+        <div class="oc"><input type="radio" name="q6" id="q6c" value="Sinto resistência inicial, mas me adapto quando vejo sentido" data-disc="C:1,S:1"><label for="q6c"><span class="omark"></span>Sinto resistência inicial, mas me adapto quando vejo sentido</label></div>
+        <div class="oc"><input type="radio" name="q6" id="q6d" value="Envolvo a equipe na transição para que a mudança seja construída junto" data-disc="I:2,S:1"><label for="q6d"><span class="omark"></span>Envolvo a equipe na transição para que a mudança seja construída junto</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">7</span>Diante de uma demanda urgente fora do seu escopo habitual, você:</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q7" id="q7a" value="Assume e resolve. Entendo que as fronteiras de escopo são dinâmicas" data-disc="D:2,S:1"><label for="q7a"><span class="omark"></span>Assume e resolve. Entendo que as fronteiras de escopo são dinâmicas</label></div>
+        <div class="oc"><input type="radio" name="q7" id="q7b" value="Avalia o impacto no que já está em andamento antes de decidir" data-disc="C:2,D:1"><label for="q7b"><span class="omark"></span>Avalia o impacto no que já está em andamento antes de decidir</label></div>
+        <div class="oc"><input type="radio" name="q7" id="q7c" value="Redireciona para quem tem mais expertise. Clareza de papéis importa" data-disc="C:2,S:1"><label for="q7c"><span class="omark"></span>Redireciona para quem tem mais expertise. Clareza de papéis importa</label></div>
+        <div class="oc"><input type="radio" name="q7" id="q7d" value="Consulta a liderança antes de qualquer movimentação" data-disc="S:2"><label for="q7d"><span class="omark"></span>Consulta a liderança antes de qualquer movimentação</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">8</span>Descreva brevemente uma iniciativa que você criou do zero na sua trajetória. O que te motivou, o que foi difícil e o que resultou.</label>
+      <textarea class="tfield" name="q8_iniciativa" placeholder="Conte com suas próprias palavras. Não precisa ser perfeito, precisa ser real."></textarea>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">9</span>Quando você assume um compromisso, qual é o seu nível de persistência para honrá-lo mesmo diante de adversidades?</label>
+      <div class="scale-box">
+        <div class="scale-ends"><span>Reavaliei se necessário</span><span>Honro a qualquer custo</span></div>
+        <div class="scale-opts">
+          <div class="so"><input type="radio" name="q9" id="sc1" value="1" data-disc=""><label for="sc1">1</label></div>
+          <div class="so"><input type="radio" name="q9" id="sc2" value="2" data-disc="S:1"><label for="sc2">2</label></div>
+          <div class="so"><input type="radio" name="q9" id="sc3" value="3" data-disc="S:1,D:1"><label for="sc3">3</label></div>
+          <div class="so"><input type="radio" name="q9" id="sc4" value="4" data-disc="D:1,S:2"><label for="sc4">4</label></div>
+          <div class="so"><input type="radio" name="q9" id="sc5" value="5" data-disc="D:2,S:1"><label for="sc5">5</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="navrow">
+      <button class="btn btn-back" onclick="prevStep()">&#8592; Voltar</button>
+      <button class="btn btn-next" onclick="nextStep()">Próximo bloco &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══════ BLOCO 3 ══════ -->
+  <div class="form-step" id="step-2">
+    <div class="step-tag">Bloco 3 de 6</div>
+    <h1 class="step-h">Relações e<br>Ética</h1>
+    <p class="step-desc">Como você se relaciona com as pessoas, com a verdade e com situações que exigem posicionamento.</p>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">10</span>Um colaborador recém-contratado chega até você em crise. Está se sentindo perdido, sem suporte do gestor e considerando sair nos primeiros 30 dias. O que você faz?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q10" id="q10a" value="Escuto com presença total, entendo a raiz e atuo junto ao gestor imediatamente" data-disc="I:2,D:1"><label for="q10a"><span class="omark"></span>Escuto com presença total, entendo a raiz e atuo junto ao gestor imediatamente</label></div>
+        <div class="oc"><input type="radio" name="q10" id="q10b" value="Faço o acolhimento, registro e protocolo um plano de ação formal" data-disc="S:2,C:1"><label for="q10b"><span class="omark"></span>Faço o acolhimento, registro e protocolo um plano de ação formal</label></div>
+        <div class="oc"><input type="radio" name="q10" id="q10c" value="Encaminho para o gestor direto. Não é minha função substituir a liderança" data-disc="C:1"><label for="q10c"><span class="omark"></span>Encaminho para o gestor direto. Não é minha função substituir a liderança</label></div>
+        <div class="oc"><input type="radio" name="q10" id="q10d" value="Entendo o contexto e calibro se é algo pontual ou sintoma de um problema maior" data-disc="C:2,I:1"><label for="q10d"><span class="omark"></span>Entendo o contexto e calibro se é algo pontual ou sintoma de um problema maior</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">11</span>Você precisa comunicar uma decisão da empresa que sabe que será impopular entre os colaboradores. Como você age?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q11" id="q11a" value="Comunico com clareza e antecedência, explicando o racional mesmo que seja difícil" data-disc="D:2,C:1"><label for="q11a"><span class="omark"></span>Comunico com clareza e antecedência, explicando o racional mesmo que seja difícil</label></div>
+        <div class="oc"><input type="radio" name="q11" id="q11b" value="Adapto a mensagem para suavizar o impacto. A forma importa tanto quanto o conteúdo" data-disc="I:2,S:1"><label for="q11b"><span class="omark"></span>Adapto a mensagem para suavizar o impacto. A forma importa tanto quanto o conteúdo</label></div>
+        <div class="oc"><input type="radio" name="q11" id="q11c" value="Abro espaço para perguntas antes de comunicar. Prefiro construir junto" data-disc="I:1,S:2"><label for="q11c"><span class="omark"></span>Abro espaço para perguntas antes de comunicar. Prefiro construir junto</label></div>
+        <div class="oc"><input type="radio" name="q11" id="q11d" value="Delego para o gestor. Ele tem mais contexto com a equipe" data-disc="S:1"><label for="q11d"><span class="omark"></span>Delego para o gestor. Ele tem mais contexto com a equipe</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">12</span>Você descobre que uma prática adotada pela empresa, embora legal, viola o que você entende como ética profissional. Como age?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q12" id="q12a" value="Levo formalmente à liderança com dados e argumento claro" data-disc="D:2,C:2"><label for="q12a"><span class="omark"></span>Levo formalmente à liderança com dados e argumento claro</label></div>
+        <div class="oc"><input type="radio" name="q12" id="q12b" value="Documento minha discordância por escrito para me resguardar" data-disc="C:2,S:1"><label for="q12b"><span class="omark"></span>Documento minha discordância por escrito para me resguardar</label></div>
+        <div class="oc"><input type="radio" name="q12" id="q12c" value="Adapto minha conduta dentro do possível, mantendo minha integridade nos detalhes" data-disc="S:2,C:1"><label for="q12c"><span class="omark"></span>Adapto minha conduta dentro do possível, mantendo minha integridade nos detalhes</label></div>
+        <div class="oc"><input type="radio" name="q12" id="q12d" value="Avalio se é uma linha que não posso cruzar e repenso meu vínculo se necessário" data-disc="D:2,C:1"><label for="q12d"><span class="omark"></span>Avalio se é uma linha que não posso cruzar e repenso meu vínculo se necessário</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">13</span>Para você, qual é o verdadeiro cliente do RH dentro de uma empresa?</label>
+      <div class="opts">
+        <div class="oc"><input type="radio" name="q13" id="q13a" value="O colaborador. A experiência dele é o produto do RH" data-disc="I:2,S:1"><label for="q13a"><span class="omark"></span>O colaborador. A experiência dele é o produto do RH</label></div>
+        <div class="oc"><input type="radio" name="q13" id="q13b" value="O negócio. RH entrega resultado, não serviços de bem-estar" data-disc="D:2"><label for="q13b"><span class="omark"></span>O negócio. RH entrega resultado, não serviços de bem-estar</label></div>
+        <div class="oc"><input type="radio" name="q13" id="q13c" value="São os dois. Sustentabilidade vem do equilíbrio entre resultado e experiência" data-disc="I:1,D:1,S:1,C:1"><label for="q13c"><span class="omark"></span>São os dois. Sustentabilidade vem do equilíbrio entre resultado e experiência</label></div>
+        <div class="oc"><input type="radio" name="q13" id="q13d" value="A liderança. RH é um braço estratégico da gestão" data-disc="D:1,C:1"><label for="q13d"><span class="omark"></span>A liderança. RH é um braço estratégico da gestão</label></div>
+      </div>
+    </div>
+
+    <div class="qb">
+      <label class="qlabel"><span class="qnum">14</span>Você já teve que dar um feedback difícil para alguém hierarquicamente superior a você? Como foi e o que aprendeu?</label>
+      <textarea class="tfield" name="q14_feedback" placeholder="Conte com suas próprias palavras."></textarea>
+    </div>
+
+    <div class="navrow">
+      <button class="btn btn-back" onclick="prevStep()">&#8592; Voltar</button>
+      <button class="btn btn-next" onclick="nextStep()">Próximo bloco &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══════ BLOCO 4 ══════ -->
+  <div class="form-step" id="step-3">
+    <div class="step-tag">Bloco 4 de 6</div>
+    <h1 class="step-h">Cenários<br>Práticos</h1>
+    <p class="step-desc">Situações reais. Escolha a resposta que mais se aproxima da sua ação natural, não da resposta ideal.</p>
+
+    <div class="scene">
+      <div class="scene-top">
+        <div class="scene-label">Cenário A — Tomada de Decisão</div>
+        <div class="scene-q">A empresa quer implantar gestão de desempenho contínua, mas a liderança está resistente e sem tempo. Você tem autonomia para desenhar o processo mas não para obrigar a adesão. O que você faz?</div>
+      </div>
+      <div class="scene-body">
+        <div class="opts">
+          <div class="oc"><input type="radio" name="c1" id="c1a" value="Começo por quem quer. Crio um piloto com líderes engajados e uso os resultados para convencer os demais" data-disc="D:2,I:1"><label for="c1a"><span class="omark"></span>Começo por quem quer. Crio um piloto com líderes engajados e uso os resultados para convencer os demais</label></div>
+          <div class="oc"><input type="radio" name="c1" id="c1b" value="Apresento à alta gestão o risco de não ter gestão de desempenho. Preciso de patrocínio para avançar" data-disc="C:2,D:1"><label for="c1b"><span class="omark"></span>Apresento à alta gestão o risco de não ter gestão de desempenho. Preciso de patrocínio para avançar</label></div>
+          <div class="oc"><input type="radio" name="c1" id="c1c" value="Simplifico o processo ao máximo para reduzir a fricção e aumentar a adesão espontânea" data-disc="I:2,C:1"><label for="c1c"><span class="omark"></span>Simplifico o processo ao máximo para reduzir a fricção e aumentar a adesão espontânea</label></div>
+          <div class="oc"><input type="radio" name="c1" id="c1d" value="Aguardo o momento certo. Impor processo sem patrocínio gera resultado contrário" data-disc="S:2,C:1"><label for="c1d"><span class="omark"></span>Aguardo o momento certo. Impor processo sem patrocínio gera resultado contrário</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene">
+      <div class="scene-top">
+        <div class="scene-label">Cenário B — Execução sob Pressão</div>
+        <div class="scene-q">Você precisa entregar um Plano de Cargos e Salários em 60 dias, sem orçamento adicional e com equipe reduzida. O prazo não pode ser negociado. Por onde você começa?</div>
+      </div>
+      <div class="scene-body">
+        <div class="opts">
+          <div class="oc"><input type="radio" name="c2" id="c2a" value="Mapeio os cargos e critérios internos. Trabalho com o que tenho" data-disc="D:2,S:1"><label for="c2a"><span class="omark"></span>Mapeio os cargos e critérios internos. Trabalho com o que tenho</label></div>
+          <div class="oc"><input type="radio" name="c2" id="c2b" value="Pesquiso benchmarks e defino a metodologia antes de executar" data-disc="C:2,I:1"><label for="c2b"><span class="omark"></span>Pesquiso benchmarks e defino a metodologia antes de executar</label></div>
+          <div class="oc"><input type="radio" name="c2" id="c2c" value="Envolvo os gestores para coletar dados e construir comprometimento" data-disc="I:2,S:1"><label for="c2c"><span class="omark"></span>Envolvo os gestores para coletar dados e construir comprometimento</label></div>
+          <div class="oc"><input type="radio" name="c2" id="c2d" value="Apresento o que é possível no prazo e negocio o escopo com a direção" data-disc="D:1,C:2"><label for="c2d"><span class="omark"></span>Apresento o que é possível no prazo e negocio o escopo com a direção</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene">
+      <div class="scene-top">
+        <div class="scene-label">Cenário C — Influência sem Autoridade</div>
+        <div class="scene-q">Os dados de clima apontam deterioração clara no engajamento, mas a liderança não considera isso prioritário. Você não tem poder formal de decisão. Como você age?</div>
+      </div>
+      <div class="scene-body">
+        <div class="opts">
+          <div class="oc"><input type="radio" name="c3" id="c3a" value="Monto análise conectando clima a indicadores de negócio. Falo a língua que convence" data-disc="D:2,C:2"><label for="c3a"><span class="omark"></span>Monto análise conectando clima a indicadores de negócio. Falo a língua que convence</label></div>
+          <div class="oc"><input type="radio" name="c3" id="c3b" value="Atuo diretamente com as equipes em ações de engajamento sem esperar validação" data-disc="D:1,I:2"><label for="c3b"><span class="omark"></span>Atuo diretamente com as equipes em ações de engajamento sem esperar validação</label></div>
+          <div class="oc"><input type="radio" name="c3" id="c3c" value="Registro formalmente os riscos identificados e mantenho transparência" data-disc="C:2,S:1"><label for="c3c"><span class="omark"></span>Registro formalmente os riscos identificados e mantenho transparência</label></div>
+          <div class="oc"><input type="radio" name="c3" id="c3d" value="Aguardo o momento estratégico. Construo o argumento e espero a abertura certa" data-disc="S:2,C:1"><label for="c3d"><span class="omark"></span>Aguardo o momento estratégico. Construo o argumento e espero a abertura certa</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="scene">
+      <div class="scene-top">
+        <div class="scene-label">Cenário D — Experiência do Colaborador</div>
+        <div class="scene-q">A empresa quer melhorar a experiência do colaborador mas não tem budget para isso. O que você propõe?</div>
+      </div>
+      <div class="scene-body">
+        <div class="opts">
+          <div class="oc"><input type="radio" name="c4" id="c4a" value="Mapeio os momentos de maior impacto na jornada e foco no que pode ser feito com custo zero" data-disc="C:2,D:1"><label for="c4a"><span class="omark"></span>Mapeio os momentos de maior impacto na jornada e foco no que pode ser feito com custo zero</label></div>
+          <div class="oc"><input type="radio" name="c4" id="c4b" value="Envolvo os gestores. Experiência é resultado de liderança, não de programa de RH" data-disc="I:2,D:1"><label for="c4b"><span class="omark"></span>Envolvo os gestores. Experiência é resultado de liderança, não de programa de RH</label></div>
+          <div class="oc"><input type="radio" name="c4" id="c4c" value="Escuto os colaboradores primeiro. Eles sabem o que precisam melhor do que qualquer análise" data-disc="I:2,S:1"><label for="c4c"><span class="omark"></span>Escuto os colaboradores primeiro. Eles sabem o que precisam melhor do que qualquer análise</label></div>
+          <div class="oc"><input type="radio" name="c4" id="c4d" value="Sem budget real qualquer iniciativa vira cosmético. Defendo que se faça menos mas com profundidade" data-disc="C:2,D:1"><label for="c4d"><span class="omark"></span>Sem budget real qualquer iniciativa vira cosmético. Defendo que se faça menos mas com profundidade</label></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="qb" style="margin-top:28px;">
+      <div class="reflect-card"><strong>Reflexão final.</strong> Não há opções para essa. Queremos sua voz direta.</div>
+      <label class="qlabel"><span class="qnum">15</span>Na sua visão, o que diferencia um RH que realmente move a cultura de um RH que apenas a descreve?</label>
+      <textarea class="tfield" name="q15_cultura" placeholder="Escreva com autenticidade. Essa é a pergunta mais importante deste formulário."></textarea>
+    </div>
+
+    <div class="navrow">
+      <button class="btn btn-back" onclick="prevStep()">&#8592; Voltar</button>
+      <button class="btn btn-next" onclick="calcAndNext()">Ver meu perfil &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══════ BLOCO 5 — DISC RESULT ══════ -->
+  <div class="form-step" id="step-disc">
+    <div class="step-tag">Bloco 5 de 6</div>
+    <h1 class="step-h">Seu Perfil<br>DISC</h1>
+    <p class="step-desc">Com base nas suas respostas, identificamos seu perfil comportamental predominante. Este resultado é para seu autoconhecimento.</p>
+
+    <div class="disc-hero">
+      <div class="disc-badge-wrap">
+        <div class="disc-letter" id="discLetter" style="background:var(--navy);">D</div>
+      </div>
+      <div class="disc-profile-name" id="discName">Dominância</div>
+      <div class="disc-profile-sub" id="discSub">Seu perfil será carregado aqui.</div>
+    </div>
+
+    <div class="disc-bars" id="discBars">
+      <div class="disc-bar-block">
+        <div class="disc-bar-header">
+          <div class="disc-bar-label"><span class="disc-dot" style="background:var(--D)"></span>D — Dominância</div>
+          <span class="disc-bar-pct" id="pctD">0%</span>
+        </div>
+        <div class="disc-track"><div class="disc-fill" id="fillD" style="background:var(--D)"></div></div>
+      </div>
+      <div class="disc-bar-block">
+        <div class="disc-bar-header">
+          <div class="disc-bar-label"><span class="disc-dot" style="background:var(--I)"></span>I — Influência</div>
+          <span class="disc-bar-pct" id="pctI">0%</span>
+        </div>
+        <div class="disc-track"><div class="disc-fill" id="fillI" style="background:var(--I)"></div></div>
+      </div>
+      <div class="disc-bar-block">
+        <div class="disc-bar-header">
+          <div class="disc-bar-label"><span class="disc-dot" style="background:var(--S)"></span>S — Estabilidade</div>
+          <span class="disc-bar-pct" id="pctS">0%</span>
+        </div>
+        <div class="disc-track"><div class="disc-fill" id="fillS" style="background:var(--S)"></div></div>
+      </div>
+      <div class="disc-bar-block">
+        <div class="disc-bar-header">
+          <div class="disc-bar-label"><span class="disc-dot" style="background:var(--C)"></span>C — Conformidade</div>
+          <span class="disc-bar-pct" id="pctC">0%</span>
+        </div>
+        <div class="disc-track"><div class="disc-fill" id="fillC" style="background:var(--C)"></div></div>
+      </div>
+    </div>
+
+    <div class="disc-traits">
+      <div class="disc-traits-title">Tendências do seu perfil</div>
+      <div class="disc-traits-grid" id="discTraitsGrid"></div>
+    </div>
+
+    <div class="disc-alert" id="discAlert"></div>
+    <div class="disc-disclaimer">Este mapeamento é indicativo e complementar. Ele não define sozinho a adequação ao cargo.<br>Suas respostas abertas têm peso igual na avaliação.</div>
+
+    <div class="navrow">
+      <button class="btn btn-back" onclick="prevStep()">&#8592; Rever respostas</button>
+      <button class="btn btn-navy" onclick="nextStep()">Prosseguir para envio &#8594;</button>
+    </div>
+  </div>
+
+  <!-- ══════ BLOCO 6 — DADOS ══════ -->
+  <div class="form-step" id="step-4">
+    <div class="step-tag">Bloco 6 de 6</div>
+    <h1 class="step-h">Seus<br>Dados</h1>
+    <p class="step-desc">Para continuidade do processo e contato pela equipe de seleção.</p>
+
+    <div class="privacy-note">
+      Suas informações são tratadas com total sigilo e usadas exclusivamente neste processo seletivo. A empresa será revelada na próxima etapa.
+    </div>
+
+    <form id="fitForm" action="https://formspree.io/f/SEU_ENDPOINT_AQUI" method="POST">
+      <input type="hidden" name="B1_Q1_tempo_rh"              id="h_q1">
+      <input type="hidden" name="B1_Q2_liderou_equipe"         id="h_q2">
+      <input type="hidden" name="B1_Q3_estruturou_zero"        id="h_q3">
+      <input type="hidden" name="B1_Q4_posicionamento"         id="h_q4">
+      <input type="hidden" name="B2_Q5_obstaculos"             id="h_q5">
+      <input type="hidden" name="B2_Q6_mudancas"               id="h_q6">
+      <input type="hidden" name="B2_Q7_demanda_escopo"         id="h_q7">
+      <input type="hidden" name="B2_Q8_iniciativa"             id="h_q8">
+      <input type="hidden" name="B2_Q9_comprometimento_escala" id="h_q9">
+      <input type="hidden" name="B3_Q10_colaborador_crise"     id="h_q10">
+      <input type="hidden" name="B3_Q11_comunicar_impopular"   id="h_q11">
+      <input type="hidden" name="B3_Q12_etica_pressao"         id="h_q12">
+      <input type="hidden" name="B3_Q13_cliente_rh"            id="h_q13">
+      <input type="hidden" name="B3_Q14_feedback_superior"     id="h_q14">
+      <input type="hidden" name="B4_C1_gestao_desempenho"      id="h_c1">
+      <input type="hidden" name="B4_C2_pcs_prazo"              id="h_c2">
+      <input type="hidden" name="B4_C3_clima"                  id="h_c3">
+      <input type="hidden" name="B4_C4_experiencia_budget"     id="h_c4">
+      <input type="hidden" name="B4_Q15_rh_cultura"            id="h_q15">
+      <input type="hidden" name="DISC_dominante"               id="h_disc_dom">
+      <input type="hidden" name="DISC_scores_D_I_S_C"          id="h_disc_scores">
+
+      <div class="qdiv"><span class="qdiv-label">Informações Pessoais</span><div class="qdiv-line"></div></div>
+
+      <div class="qb">
+        <div class="igrid">
+          <div class="fwrap"><label class="flbl">Nome completo <span class="req">*</span></label><input type="text" name="nome" class="ifield" placeholder="Seu nome completo" required></div>
+          <div class="fwrap"><label class="flbl">E-mail <span class="req">*</span></label><input type="email" name="email" class="ifield" placeholder="seu@email.com" required></div>
+        </div>
+      </div>
+      <div class="qb">
+        <div class="igrid">
+          <div class="fwrap"><label class="flbl">WhatsApp <span class="req">*</span></label><input type="tel" name="whatsapp" class="ifield" placeholder="(21) 9 0000-0000" required></div>
+          <div class="fwrap"><label class="flbl">Pretensão salarial <span class="req">*</span></label><input type="text" name="pretensao_salarial" class="ifield" placeholder="Ex: R$ 8.000" required></div>
+        </div>
+      </div>
+      <div class="qb">
+        <div class="fwrap"><label class="flbl">LinkedIn</label><input type="url" name="linkedin" class="ifield" placeholder="https://linkedin.com/in/seu-perfil"></div>
+      </div>
+
+      <div class="qdiv"><span class="qdiv-label">Formação</span><div class="qdiv-line"></div></div>
+
+      <div class="qb">
+        <label class="qlabel"><span class="qnum">16</span>Formação mais alta concluída</label>
+        <div class="opts g2">
+          <div class="oc"><input type="radio" name="formacao" id="f1" value="Graduação"><label for="f1"><span class="omark"></span>Graduação</label></div>
+          <div class="oc"><input type="radio" name="formacao" id="f2" value="Pós-graduação / MBA"><label for="f2"><span class="omark"></span>Pós-graduação / MBA</label></div>
+          <div class="oc"><input type="radio" name="formacao" id="f3" value="Mestrado"><label for="f3"><span class="omark"></span>Mestrado</label></div>
+          <div class="oc"><input type="radio" name="formacao" id="f4" value="Doutorado"><label for="f4"><span class="omark"></span>Doutorado</label></div>
+        </div>
+      </div>
+
+      <div class="qdiv"><span class="qdiv-label">Encerramento</span><div class="qdiv-line"></div></div>
+
+      <div class="qb">
+        <label class="qlabel"><span class="qnum">17</span>Há algo sobre sua trajetória ou motivação que não foi contemplado e que você considera importante compartilhar?</label>
+        <textarea name="comentario_final" class="tfield" rows="3" placeholder="Espaço livre."></textarea>
+      </div>
+
+      <div class="navrow" style="margin-bottom:16px;">
+        <button class="btn btn-back" type="button" onclick="prevStep()">&#8592; Voltar</button>
+      </div>
+
+      <button type="submit" class="btn btn-submit" id="submitBtn">
+        <span class="btn-text">Enviar minha avaliação</span>
+        <span class="spinner"></span>
+      </button>
+      <p style="text-align:center;font-size:12px;color:var(--ink-faint);margin-top:14px;line-height:1.6;">
+        Ao enviar, você confirma que as informações prestadas são verdadeiras.<br>
+        A identidade da empresa será revelada na entrevista.
+      </p>
+    </form>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="success-screen" id="success">
+    <div class="success-mark">&#10003;</div>
+    <h2>Avaliação recebida</h2>
+    <div class="success-bar"></div>
+    <p>Obrigado(a) pela seriedade com que conduziu esta etapa.<br><br>Nossa equipe analisará sua avaliação e, caso haja aderência ao perfil, entraremos em contato em até <strong>5 dias úteis</strong> pelo e-mail ou WhatsApp informados.</p>
+  </div>
+
+  <div class="footer" id="footerNote">
+    Processo seletivo confidencial &nbsp;&middot;&nbsp; Coordenador(a) de RH Estratégico &nbsp;&middot;&nbsp; Rio de Janeiro
+  </div>
+</main>
+</div>
+
+<script>
+/* ══════════════════════════════════════
+   DISC DATA
+══════════════════════════════════════ */
+const DISC_PROFILES = {
+  D: {
+    name: 'Dominância',
+    color: '#C0392B',
+    sub: 'Você tende a agir com decisão e autonomia. Dirige resultados com determinação, assume responsabilidades e não espera que as coisas aconteçam. Em ambientes de construção e pressão, seu perfil tende a liderar pelo exemplo e pela execução.',
+    traits: ['Orientado a resultados','Toma decisões rapidamente','Assume protagonismo','Alta tolerância ao risco','Direto na comunicação','Desconforto com excesso de processo'],
+    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Dominância podem ter dificuldade em ouvir antes de agir e em construir consenso. Em RH, isso exige atenção redobrada à escuta ativa e à gestão de resistências culturais.'
+  },
+  I: {
+    name: 'Influência',
+    color: '#E67E22',
+    sub: 'Você conecta pessoas e energiza ambientes. Seu perfil é naturalmente comunicativo, entusiasta e orientado à experiência humana. Tem facilidade para criar adesão, mobilizar times e construir relações de confiança.',
+    traits: ['Forte capacidade de influência','Comunicação expressiva','Facilidade para criar engajamento','Orientado à experiência do outro','Pensamento criativo','Pode subestimar dados e processos'],
+    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Influência podem ter dificuldade com estruturação de processos e análise fria de dados. Em RH estratégico, o equilíbrio entre relacionamento e rigor analítico é essencial.'
+  },
+  S: {
+    name: 'Estabilidade',
+    color: '#27AE60',
+    sub: 'Você é consistente, leal e comprometido com o que assume. Seu perfil sustenta a cultura pelo exemplo silencioso da constância. Em ambientes de pressão, funciona como âncora de equilíbrio e confiança para as pessoas ao redor.',
+    traits: ['Alta confiabilidade','Colaboração genuína','Paciência e escuta ativa','Comprometimento com o combinado','Sensível às relações humanas','Pode resistir a mudanças abruptas'],
+    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Estabilidade podem evitar confrontos necessários e ter dificuldade em decisões que gerem instabilidade. Em RH estratégico, a capacidade de influenciar sob pressão precisa ser desenvolvida intencionalmente.'
+  },
+  C: {
+    name: 'Conformidade',
+    color: '#2980B9',
+    sub: 'Você é analítico, criterioso e orientado à qualidade. Pensa antes de agir, documenta, questiona inconsistências e protege a integridade dos processos. Em RH, seu perfil tende a construir sistemas sólidos e confiáveis.',
+    traits: ['Pensamento analítico','Alta precisão e qualidade','Orientado a dados e evidências','Criterioso nas decisões','Ético e consistente','Pode ser lento em contextos de alta ambiguidade'],
+    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Conformidade podem ter dificuldade com ambiguidade e excesso de análise pode atrasar execução. Em RH estratégico, a capacidade de decidir e agir com dados incompletos é fundamental.'
+  }
+};
+
+/* ══════════════════════════════════════
+   NAVIGATION STATE
+══════════════════════════════════════ */
+// steps: 0,1,2,3 = blocos 1-4 | 'disc' = resultado | 4 = dados
+const STEP_IDS = ['step-0','step-1','step-2','step-3','step-disc','step-4'];
+const STEP_LABELS = ['Perfil Profissional','Cultura e Comportamento','Relações e Ética','Cenários Práticos','Seu Perfil DISC','Seus Dados'];
+let current = 0;
+
+function getStepEl(idx){ return document.getElementById(STEP_IDS[idx]); }
+
+function goTo(idx){
+  getStepEl(current).classList.remove('active');
+  current = idx;
+  getStepEl(current).classList.add('active');
+  updateUI();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function nextStep(){ if(current < STEP_IDS.length-1) goTo(current+1); }
+function prevStep(){ if(current > 0) goTo(current-1); }
+
+function calcAndNext(){
+  buildDisc();
+  nextStep();
+}
+
+function updateUI(){
+  const total = STEP_IDS.length;
+  const pct = ((current+1)/total*100).toFixed(0);
+  document.getElementById('progFill').style.width = pct+'%';
+  document.getElementById('progLabel').textContent = 'Bloco '+(current+1)+' de '+total;
+
+  document.querySelectorAll('.snav-item').forEach((el,i)=>{
+    el.classList.remove('active','done');
+    if(i===current) el.classList.add('active');
+    if(i<current)   el.classList.add('done');
+  });
+}
+
+/* ══════════════════════════════════════
+   DISC CALCULATION
+══════════════════════════════════════ */
+function buildDisc(){
+  const scores = {D:0,I:0,S:0,C:0};
+
+  document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(inp=>{
+    const raw = inp.getAttribute('data-disc')||'';
+    raw.split(',').forEach(pair=>{
+      const [letter,pts] = pair.trim().split(':');
+      if(letter && scores[letter]!==undefined) scores[letter] += parseInt(pts)||1;
+    });
+  });
+
+  const total = Object.values(scores).reduce((a,b)=>a+b,0)||1;
+  const pcts = {};
+  ['D','I','S','C'].forEach(l=> pcts[l] = Math.round(scores[l]/total*100));
+
+  // dominant
+  const dom = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+  const profile = DISC_PROFILES[dom];
+
+  // letter
+  const letterEl = document.getElementById('discLetter');
+  letterEl.textContent = dom;
+  letterEl.style.background = profile.color;
+
+  // name + sub
+  document.getElementById('discName').textContent = profile.name;
+  document.getElementById('discSub').textContent = profile.sub;
+
+  // bars — animate after short delay
+  setTimeout(()=>{
+    ['D','I','S','C'].forEach(l=>{
+      document.getElementById('fill'+l).style.width = pcts[l]+'%';
+      document.getElementById('pct'+l).textContent = pcts[l]+'%';
+    });
+  },120);
+
+  // traits
+  const grid = document.getElementById('discTraitsGrid');
+  grid.innerHTML = '';
+  profile.traits.forEach(t=>{
+    const div = document.createElement('div');
+    div.className = 'trait-item';
+    div.innerHTML = '<span class="trait-check">&#10003;</span>'+t;
+    grid.appendChild(div);
+  });
+
+  // alert
+  document.getElementById('discAlert').innerHTML = profile.alert;
+
+  // store in hidden fields
+  document.getElementById('h_disc_dom').value = dom+' ('+profile.name+')';
+  document.getElementById('h_disc_scores').value =
+    'D:'+scores.D+' I:'+scores.I+' S:'+scores.S+' C:'+scores.C+
+    ' | D:'+pcts.D+'% I:'+pcts.I+'% S:'+pcts.S+'% C:'+pcts.C+'%';
+}
+
+/* ══════════════════════════════════════
+   COLLECT ANSWERS
+══════════════════════════════════════ */
+function collectAnswers(){
+  const radioMap = {
+    h_q1:'q1',h_q2:'q2',h_q3:'q3',h_q4:'q4',
+    h_q5:'q5',h_q6:'q6',h_q7:'q7',h_q9:'q9',
+    h_q10:'q10',h_q11:'q11',h_q12:'q12',h_q13:'q13',
+    h_c1:'c1',h_c2:'c2',h_c3:'c3',h_c4:'c4'
+  };
+  for(const[id,name] of Object.entries(radioMap)){
+    const el=document.querySelector('[name="'+name+'"]:checked');
+    const hf=document.getElementById(id);
+    if(el&&hf) hf.value=el.value;
+  }
+  const textMap = {h_q8:'q8_iniciativa',h_q14:'q14_feedback',h_q15:'q15_cultura'};
+  for(const[id,name] of Object.entries(textMap)){
+    const el=document.querySelector('[name="'+name+'"]');
+    const hf=document.getElementById(id);
+    if(el&&hf) hf.value=el.value;
+  }
+}
+
+/* ══════════════════════════════════════
+   SUBMIT
+══════════════════════════════════════ */
+document.getElementById('fitForm').addEventListener('submit', async function(e){
+  e.preventDefault();
+  collectAnswers();
+  const btn=document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  try{
+    const res=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{'Accept':'application/json'}});
+    if(res.ok){
+      STEP_IDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.classList.remove('active'); });
+      document.getElementById('success').classList.add('show');
+      document.getElementById('footerNote').style.display='none';
+      window.scrollTo({top:0,behavior:'smooth'});
+    } else {
+      alert('Erro ao enviar. Por favor, tente novamente.');
+      btn.classList.remove('loading');
+    }
+  } catch {
+    alert('Erro de conexão. Verifique sua internet e tente novamente.');
+    btn.classList.remove('loading');
+  }
+});
+</script>
+</body>
+</html>
