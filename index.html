@@ -161,128 +161,6 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 /* ─── PRIVACY NOTE ─── */
 .privacy-note{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;background:rgba(11,37,69,0.04);border:1px solid rgba(11,37,69,0.1);border-left:3px solid var(--navy);border-radius:var(--radius);font-size:12.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:28px;}
  
-/* ══════════════════════════════════════
-   DISC RESULT SCREEN
-══════════════════════════════════════ */
-#step-disc {display:none;}
-#step-disc.active {display:block;}
- 
-.disc-hero{
-  text-align:center;
-  padding:8px 0 32px;
-  border-bottom:1px solid var(--border);
-  margin-bottom:32px;
-}
- 
-.disc-badge-wrap{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:12px;
-  margin-bottom:20px;
-}
- 
-.disc-letter{
-  width:80px;height:80px;
-  border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Syne',sans-serif;
-  font-size:2.4rem;font-weight:800;
-  color:white;
-  box-shadow:0 8px 28px rgba(0,0,0,0.18);
-  transition:transform 0.4s var(--ease);
-  animation:popIn 0.5s 0.2s var(--ease) both;
-}
-@keyframes popIn{from{opacity:0;transform:scale(0.6);}to{opacity:1;transform:scale(1);}}
- 
-.disc-profile-name{
-  font-family:'Syne',sans-serif;
-  font-size:1.7rem;font-weight:700;
-  color:var(--ink);
-  margin-bottom:6px;
-}
- 
-.disc-profile-sub{
-  font-size:14px;color:var(--ink-muted);
-  line-height:1.6;max-width:460px;margin:0 auto;
-}
- 
-/* bars */
-.disc-bars{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:16px;
-  margin-bottom:32px;
-}
-@media(max-width:520px){.disc-bars{grid-template-columns:1fr;}}
- 
-.disc-bar-block{}
-.disc-bar-header{
-  display:flex;justify-content:space-between;align-items:center;
-  margin-bottom:7px;
-}
-.disc-bar-label{
-  display:flex;align-items:center;gap:8px;
-  font-size:12.5px;font-weight:600;color:var(--ink-soft);
-}
-.disc-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
-.disc-bar-pct{font-size:12px;font-weight:700;color:var(--ink-soft);}
-.disc-track{height:8px;background:var(--surface);border-radius:4px;overflow:hidden;}
-.disc-fill{height:100%;border-radius:4px;transition:width 1s var(--ease);width:0;}
- 
-/* profile cards */
-.disc-traits{
-  background:var(--white);
-  border:1.5px solid var(--border);
-  border-radius:var(--radius-lg);
-  padding:24px;
-  margin-bottom:28px;
-}
-.disc-traits-title{
-  font-size:11px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;
-  color:var(--orange);margin-bottom:16px;
-}
-.disc-traits-grid{
-  display:grid;grid-template-columns:1fr 1fr;gap:10px;
-}
-@media(max-width:480px){.disc-traits-grid{grid-template-columns:1fr;}}
- 
-.trait-item{
-  display:flex;align-items:center;gap:9px;
-  font-size:13px;color:var(--ink-soft);
-  padding:9px 12px;
-  background:var(--off);
-  border-radius:6px;
-  border:1px solid var(--border);
-}
-.trait-check{
-  width:16px;height:16px;
-  border-radius:50%;
-  background:var(--navy);
-  display:flex;align-items:center;justify-content:center;
-  flex-shrink:0;
-  font-size:9px;color:white;font-weight:700;
-}
- 
-/* attention box */
-.disc-alert{
-  background:rgba(241,90,34,0.06);
-  border:1px solid var(--orange-bdr);
-  border-left:3px solid var(--orange);
-  border-radius:var(--radius);
-  padding:14px 16px;
-  font-size:13px;color:var(--ink-soft);line-height:1.6;
-  margin-bottom:28px;
-}
-.disc-alert strong{color:var(--orange-2);font-weight:600;}
- 
-/* disclaimer */
-.disc-disclaimer{
-  font-size:12px;color:var(--ink-faint);
-  text-align:center;line-height:1.6;
-  margin-bottom:24px;
-}
- 
 /* ─── LGPD ─── */
 .lgpd-block {
   background: rgba(11,37,69,0.04);
@@ -642,8 +520,8 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
       Suas informações são tratadas com total sigilo e usadas exclusivamente neste processo seletivo. A empresa será revelada na próxima etapa.
     </div>
  
-    <form id="fitForm" action="https://formspree.io/f/xjgpvvgw" method="POST">
-      <input type="hidden" name="_subject" value="Novo Fit Cultural — Coordenador(a) de RH Estratégico">
+    <form id="fitForm" action="https://formspree.io/f/xjgpvvgw" method="POST" novalidate>
+      <input type="hidden" name="_subject" value="Novo Fit Cultural - Coordenador de RH Estrategico">
       <input type="hidden" name="_language" value="pt">
       <input type="hidden" name="B1_Q1_tempo_rh"              id="h_q1">
       <input type="hidden" name="B1_Q2_liderou_equipe"         id="h_q2">
@@ -671,14 +549,14 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
  
       <div class="qb">
         <div class="igrid">
-          <div class="fwrap"><label class="flbl">Nome completo <span class="req">*</span></label><input type="text" name="nome" class="ifield" placeholder="Seu nome completo" required></div>
-          <div class="fwrap"><label class="flbl">E-mail <span class="req">*</span></label><input type="email" name="email" class="ifield" placeholder="seu@email.com" required></div>
+          <div class="fwrap"><label class="flbl">Nome completo <span class="req">*</span></label><input type="text" name="nome" class="ifield" id="f_nome" placeholder="Seu nome completo"></div>
+          <div class="fwrap"><label class="flbl">E-mail <span class="req">*</span></label><input type="email" name="email" class="ifield" id="f_email" placeholder="seu@email.com"></div>
         </div>
       </div>
       <div class="qb">
         <div class="igrid">
-          <div class="fwrap"><label class="flbl">WhatsApp <span class="req">*</span></label><input type="tel" name="whatsapp" class="ifield" placeholder="(21) 9 0000-0000" required></div>
-          <div class="fwrap"><label class="flbl">Pretensão salarial <span class="req">*</span></label><input type="text" name="pretensao_salarial" class="ifield" placeholder="Ex: R$ 8.000" required></div>
+          <div class="fwrap"><label class="flbl">WhatsApp <span class="req">*</span></label><input type="tel" name="whatsapp" class="ifield" id="f_whatsapp" placeholder="(21) 9 0000-0000"></div>
+          <div class="fwrap"><label class="flbl">Pretensão salarial <span class="req">*</span></label><input type="text" name="pretensao_salarial" class="ifield" id="f_pretensao" placeholder="Ex: R$ 8.000"></div>
         </div>
       </div>
       <div class="qb">
@@ -711,7 +589,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
       <!-- LGPD -->
       <div class="lgpd-block">
         <label class="lgpd-label" for="lgpd_consent">
-          <input type="checkbox" id="lgpd_consent" name="lgpd_consent" value="Autorizado" required>
+          <input type="checkbox" id="lgpd_consent" name="lgpd_consent" value="Autorizado">
           <span class="lgpd-check-box"></span>
           <span class="lgpd-text">
             Autorizo o tratamento dos meus dados pessoais fornecidos neste formulário para fins exclusivos deste processo seletivo, conforme a
@@ -749,45 +627,19 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
  
 <script>
 /* ══════════════════════════════════════
-   DISC DATA
+   DISC PROFILES (only used to populate hidden fields)
 ══════════════════════════════════════ */
 const DISC_PROFILES = {
-  D: {
-    name: 'Dominância',
-    color: '#C0392B',
-    sub: 'Você tende a agir com decisão e autonomia. Dirige resultados com determinação, assume responsabilidades e não espera que as coisas aconteçam. Em ambientes de construção e pressão, seu perfil tende a liderar pelo exemplo e pela execução.',
-    traits: ['Orientado a resultados','Toma decisões rapidamente','Assume protagonismo','Alta tolerância ao risco','Direto na comunicação','Desconforto com excesso de processo'],
-    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Dominância podem ter dificuldade em ouvir antes de agir e em construir consenso. Em RH, isso exige atenção redobrada à escuta ativa e à gestão de resistências culturais.'
-  },
-  I: {
-    name: 'Influência',
-    color: '#E67E22',
-    sub: 'Você conecta pessoas e energiza ambientes. Seu perfil é naturalmente comunicativo, entusiasta e orientado à experiência humana. Tem facilidade para criar adesão, mobilizar times e construir relações de confiança.',
-    traits: ['Forte capacidade de influência','Comunicação expressiva','Facilidade para criar engajamento','Orientado à experiência do outro','Pensamento criativo','Pode subestimar dados e processos'],
-    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Influência podem ter dificuldade com estruturação de processos e análise fria de dados. Em RH estratégico, o equilíbrio entre relacionamento e rigor analítico é essencial.'
-  },
-  S: {
-    name: 'Estabilidade',
-    color: '#27AE60',
-    sub: 'Você é consistente, leal e comprometido com o que assume. Seu perfil sustenta a cultura pelo exemplo silencioso da constância. Em ambientes de pressão, funciona como âncora de equilíbrio e confiança para as pessoas ao redor.',
-    traits: ['Alta confiabilidade','Colaboração genuína','Paciência e escuta ativa','Comprometimento com o combinado','Sensível às relações humanas','Pode resistir a mudanças abruptas'],
-    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Estabilidade podem evitar confrontos necessários e ter dificuldade em decisões que gerem instabilidade. Em RH estratégico, a capacidade de influenciar sob pressão precisa ser desenvolvida intencionalmente.'
-  },
-  C: {
-    name: 'Conformidade',
-    color: '#2980B9',
-    sub: 'Você é analítico, criterioso e orientado à qualidade. Pensa antes de agir, documenta, questiona inconsistências e protege a integridade dos processos. Em RH, seu perfil tende a construir sistemas sólidos e confiáveis.',
-    traits: ['Pensamento analítico','Alta precisão e qualidade','Orientado a dados e evidências','Criterioso nas decisões','Ético e consistente','Pode ser lento em contextos de alta ambiguidade'],
-    alert: '<strong>Ponto de atenção:</strong> Perfis com alta Conformidade podem ter dificuldade com ambiguidade e excesso de análise pode atrasar execução. Em RH estratégico, a capacidade de decidir e agir com dados incompletos é fundamental.'
-  }
+  D: { name: 'Dominancia' },
+  I: { name: 'Influencia' },
+  S: { name: 'Estabilidade' },
+  C: { name: 'Conformidade' }
 };
  
 /* ══════════════════════════════════════
-   NAVIGATION STATE
-   steps: 0,1,2,3 = blocos 1-4 | 4 = dados
+   NAVIGATION
 ══════════════════════════════════════ */
 const STEP_IDS = ['step-0','step-1','step-2','step-3','step-4'];
-const STEP_LABELS = ['Perfil Profissional','Cultura e Comportamento','Relações e Ética','Cenários Práticos','Seus Dados'];
 let current = 0;
  
 function getStepEl(idx){ return document.getElementById(STEP_IDS[idx]); }
@@ -797,13 +649,12 @@ function goTo(idx){
   current = idx;
   getStepEl(current).classList.add('active');
   updateUI();
-  window.scrollTo({top:0,behavior:'smooth'});
+  window.scrollTo({top:0, behavior:'smooth'});
 }
  
-function nextStep(){ if(current < STEP_IDS.length-1) goTo(current+1); }
-function prevStep(){ if(current > 0) goTo(current-1); }
+function nextStep(){ if(current < STEP_IDS.length - 1) goTo(current + 1); }
+function prevStep(){ if(current > 0) goTo(current - 1); }
  
-/* Calcula DISC silenciosamente e avança para dados */
 function calcDiscThenNext(){
   buildDisc();
   nextStep();
@@ -811,133 +662,181 @@ function calcDiscThenNext(){
  
 function updateUI(){
   const total = STEP_IDS.length;
-  const pct = ((current+1)/total*100).toFixed(0);
-  document.getElementById('progFill').style.width = pct+'%';
-  document.getElementById('progLabel').textContent = 'Bloco '+(current+1)+' de '+total;
- 
-  document.querySelectorAll('.snav-item').forEach((el,i)=>{
-    el.classList.remove('active','done');
-    if(i===current) el.classList.add('active');
-    if(i<current)   el.classList.add('done');
+  const pct = Math.round((current + 1) / total * 100);
+  document.getElementById('progFill').style.width = pct + '%';
+  document.getElementById('progLabel').textContent = 'Bloco ' + (current + 1) + ' de ' + total;
+  document.querySelectorAll('.snav-item').forEach(function(el, i){
+    el.classList.remove('active', 'done');
+    if(i === current) el.classList.add('active');
+    if(i < current)   el.classList.add('done');
   });
 }
  
 /* ══════════════════════════════════════
-   DISC CALCULATION (silent — only fills hidden fields)
+   DISC — só preenche campos hidden
 ══════════════════════════════════════ */
 function buildDisc(){
-  const scores = {D:0,I:0,S:0,C:0};
- 
-  document.querySelectorAll('input[type="radio"]:checked, input[type="checkbox"]:checked').forEach(inp=>{
-    const raw = inp.getAttribute('data-disc')||'';
-    raw.split(',').forEach(pair=>{
-      const [letter,pts] = pair.trim().split(':');
-      if(letter && scores[letter]!==undefined) scores[letter] += parseInt(pts)||1;
+  var scores = {D:0, I:0, S:0, C:0};
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(inp){
+    var raw = inp.getAttribute('data-disc') || '';
+    raw.split(',').forEach(function(pair){
+      var parts = pair.trim().split(':');
+      var letter = parts[0];
+      var pts = parseInt(parts[1]) || 1;
+      if(letter && scores[letter] !== undefined) scores[letter] += pts;
     });
   });
+  var total = scores.D + scores.I + scores.S + scores.C || 1;
+  var pcts = {
+    D: Math.round(scores.D / total * 100),
+    I: Math.round(scores.I / total * 100),
+    S: Math.round(scores.S / total * 100),
+    C: Math.round(scores.C / total * 100)
+  };
+  var dom = 'D';
+  var maxVal = 0;
+  Object.keys(scores).forEach(function(k){ if(scores[k] > maxVal){ maxVal = scores[k]; dom = k; } });
  
-  const total = Object.values(scores).reduce((a,b)=>a+b,0)||1;
-  const pcts = {};
-  ['D','I','S','C'].forEach(l=> pcts[l] = Math.round(scores[l]/total*100));
- 
-  const dom = Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
-  const profile = DISC_PROFILES[dom];
- 
-  /* store in hidden fields only */
-  const hDom = document.getElementById('h_disc_dom');
-  const hScores = document.getElementById('h_disc_scores');
-  if(hDom) hDom.value = dom+' ('+profile.name+')';
-  if(hScores) hScores.value =
-    'D:'+scores.D+' I:'+scores.I+' S:'+scores.S+' C:'+scores.C+
-    ' | D:'+pcts.D+'% I:'+pcts.I+'% S:'+pcts.S+'% C:'+pcts.C+'%';
+  var hDom = document.getElementById('h_disc_dom');
+  var hScores = document.getElementById('h_disc_scores');
+  if(hDom) hDom.value = dom + ' (' + DISC_PROFILES[dom].name + ')';
+  if(hScores) hScores.value = 'D:' + scores.D + ' I:' + scores.I + ' S:' + scores.S + ' C:' + scores.C
+    + ' | D:' + pcts.D + '% I:' + pcts.I + '% S:' + pcts.S + '% C:' + pcts.C + '%';
 }
  
 /* ══════════════════════════════════════
-   COLLECT ANSWERS
+   COLLECT — copia respostas fora do form para hidden fields
 ══════════════════════════════════════ */
 function collectAnswers(){
-  const radioMap = {
-    h_q1:'q1',h_q2:'q2',h_q3:'q3',h_q4:'q4',
-    h_q5:'q5',h_q6:'q6',h_q7:'q7',h_q9:'q9',
-    h_q10:'q10',h_q11:'q11',h_q12:'q12',h_q13:'q13',
-    h_c1:'c1',h_c2:'c2',h_c3:'c3',h_c4:'c4'
+  var radioMap = {
+    h_q1:'q1', h_q2:'q2', h_q3:'q3', h_q4:'q4',
+    h_q5:'q5', h_q6:'q6', h_q7:'q7', h_q9:'q9',
+    h_q10:'q10', h_q11:'q11', h_q12:'q12', h_q13:'q13',
+    h_c1:'c1', h_c2:'c2', h_c3:'c3', h_c4:'c4'
   };
-  for(const[id,name] of Object.entries(radioMap)){
-    const el=document.querySelector('[name="'+name+'"]:checked');
-    const hf=document.getElementById(id);
-    if(el&&hf) hf.value=el.value;
+  Object.keys(radioMap).forEach(function(id){
+    var name = radioMap[id];
+    var el = document.querySelector('input[name="' + name + '"]:checked');
+    var hf = document.getElementById(id);
+    if(el && hf) hf.value = el.value;
+  });
+  var textMap = {
+    h_q8:'q8_iniciativa',
+    h_q14:'q14_feedback',
+    h_q15:'q15_cultura'
+  };
+  Object.keys(textMap).forEach(function(id){
+    var name = textMap[id];
+    var el = document.querySelector('textarea[name="' + name + '"]');
+    var hf = document.getElementById(id);
+    if(el && hf) hf.value = el.value;
+  });
+}
+ 
+/* ══════════════════════════════════════
+   VALIDATE campos obrigatórios do bloco 5
+══════════════════════════════════════ */
+function validateForm(){
+  var errors = [];
+  var nome = document.getElementById('f_nome');
+  var email = document.getElementById('f_email');
+  var whatsapp = document.getElementById('f_whatsapp');
+  var pretensao = document.getElementById('f_pretensao');
+  var lgpd = document.getElementById('lgpd_consent');
+ 
+  if(!nome || !nome.value.trim()){ errors.push('Nome completo obrigatório.'); if(nome) nome.focus(); }
+  else if(!email || !email.value.trim() || email.value.indexOf('@') < 0){ errors.push('E-mail válido obrigatório.'); if(email) email.focus(); }
+  else if(!whatsapp || !whatsapp.value.trim()){ errors.push('WhatsApp obrigatório.'); if(whatsapp) whatsapp.focus(); }
+  else if(!pretensao || !pretensao.value.trim()){ errors.push('Pretensão salarial obrigatória.'); if(pretensao) pretensao.focus(); }
+ 
+  if(!lgpd || !lgpd.checked){
+    errors.push('Você precisa autorizar o uso dos dados (LGPD) para prosseguir.');
+    var lgpdBlock = document.querySelector('.lgpd-block');
+    if(lgpdBlock){
+      lgpdBlock.style.border = '2px solid var(--orange)';
+      lgpdBlock.scrollIntoView({behavior:'smooth', block:'center'});
+    }
   }
-  const textMap = {h_q8:'q8_iniciativa',h_q14:'q14_feedback',h_q15:'q15_cultura'};
-  for(const[id,name] of Object.entries(textMap)){
-    const el=document.querySelector('[name="'+name+'"]');
-    const hf=document.getElementById(id);
-    if(el&&hf) hf.value=el.value;
-  }
+  return errors;
 }
  
 /* ══════════════════════════════════════
    SUBMIT
 ══════════════════════════════════════ */
-document.getElementById('fitForm').addEventListener('submit', async function(e){
-  e.preventDefault();
+document.addEventListener('DOMContentLoaded', function(){
+  var form = document.getElementById('fitForm');
+  if(!form){ console.error('fitForm nao encontrado'); return; }
  
-  // Validação LGPD
-  const lgpd = document.getElementById('lgpd_consent');
-  if(!lgpd.checked){
-    lgpd.closest('.lgpd-block').style.border = '2px solid var(--orange)';
-    lgpd.closest('.lgpd-block').scrollIntoView({behavior:'smooth', block:'center'});
-    return;
-  }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    e.stopPropagation();
  
-  // Popula campos hidden com respostas dos blocos anteriores
-  collectAnswers();
- 
-  // Preenche _replyto com o email do candidato (Formspree usa para resposta)
-  const emailField = this.querySelector('[name="email"]');
-  if(emailField){
-    const replyTo = document.createElement('input');
-    replyTo.type = 'hidden';
-    replyTo.name = '_replyto';
-    replyTo.value = emailField.value;
-    this.appendChild(replyTo);
-  }
- 
-  const btn = document.getElementById('submitBtn');
-  btn.classList.add('loading');
- 
-  const formData = new FormData(this);
-  const action = this.action;
- 
-  try {
-    const res = await fetch(action, {
-      method: 'POST',
-      body: formData,
-      headers: { 'Accept': 'application/json' }
-    });
- 
-    if(res.ok){
-      // Sucesso
-      document.querySelectorAll('.form-step').forEach(el => el.classList.remove('active'));
-      document.getElementById('success').classList.add('show');
-      document.getElementById('footerNote').style.display = 'none';
-      window.scrollTo({top:0, behavior:'smooth'});
-    } else {
-      // Tenta ler o erro do Formspree
-      let detail = 'Status HTTP: ' + res.status;
-      try {
-        const json = await res.json();
-        if(json && json.errors) detail = json.errors.map(e => e.message).join(' | ');
-        else if(json && json.error) detail = json.error;
-      } catch(_){}
-      console.error('[Formspree] Erro:', detail);
-      alert('Não foi possível enviar.\n\n' + detail + '\n\nSe o erro persistir, entre em contato diretamente com o recrutador.');
-      btn.classList.remove('loading');
+    // 1. Validação manual
+    var errors = validateForm();
+    if(errors.length > 0){
+      alert(errors.join('\n'));
+      return;
     }
-  } catch(err) {
-    console.error('[Formspree] Exceção:', err);
-    alert('Erro de conexão ao enviar o formulário.\n\nVerifique sua internet e tente novamente.\n\n(' + err.message + ')');
-    btn.classList.remove('loading');
-  }
+ 
+    // 2. Coleta respostas dos steps anteriores
+    collectAnswers();
+ 
+    // 3. Calcula DISC silenciosamente
+    buildDisc();
+ 
+    // 4. Adiciona _replyto dinamicamente
+    var emailVal = document.getElementById('f_email').value;
+    var existing = form.querySelector('input[name="_replyto"]');
+    if(existing) existing.value = emailVal;
+    else {
+      var rt = document.createElement('input');
+      rt.type = 'hidden';
+      rt.name = '_replyto';
+      rt.value = emailVal;
+      form.appendChild(rt);
+    }
+ 
+    // 5. Envia
+    var btn = document.getElementById('submitBtn');
+    btn.classList.add('loading');
+ 
+    var data = new FormData(form);
+ 
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(res){
+      if(res.ok){
+        document.querySelectorAll('.form-step').forEach(function(el){ el.classList.remove('active'); });
+        document.getElementById('success').classList.add('show');
+        var footer = document.getElementById('footerNote');
+        if(footer) footer.style.display = 'none';
+        window.scrollTo({top:0, behavior:'smooth'});
+      } else {
+        return res.json().then(function(json){
+          var msg = 'Erro HTTP ' + res.status;
+          if(json && json.errors && json.errors.length){
+            msg = json.errors.map(function(e){ return e.message || e.code; }).join(' | ');
+          } else if(json && json.error){
+            msg = json.error;
+          }
+          console.error('[Formspree] ' + msg);
+          alert('Erro ao enviar:\n\n' + msg);
+          btn.classList.remove('loading');
+        }).catch(function(){
+          alert('Erro ao enviar (status ' + res.status + '). Verifique o endpoint Formspree.');
+          btn.classList.remove('loading');
+        });
+      }
+    })
+    .catch(function(err){
+      console.error('[Submit] Excecao:', err);
+      alert('Erro de conexao. Verifique sua internet.\n\nDetalhe: ' + err.message);
+      btn.classList.remove('loading');
+    });
+  });
 });
 </script>
 </body>
