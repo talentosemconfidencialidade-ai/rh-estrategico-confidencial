@@ -36,11 +36,11 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
 body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-serif;font-weight:400;line-height:1.6;min-height:100vh;-webkit-font-smoothing:antialiased;}
- 
+
 /* ─── LAYOUT ─── */
 .layout{display:grid;grid-template-columns:1fr;min-height:100vh;}
 @media(min-width:960px){.layout{grid-template-columns:320px 1fr;}}
- 
+
 /* ─── SIDEBAR ─── */
 .sidebar{
   background:var(--navy);color:var(--white);
@@ -75,25 +75,25 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .prog-fill{height:100%;background:var(--orange);border-radius:2px;transition:width 0.5s var(--ease);width:17%;}
 .prog-label{font-size:11.5px;color:rgba(255,255,255,0.5);white-space:nowrap;}
 @media(max-width:959px){.sidebar{padding:28px 20px 24px;}.step-nav{display:none;}.sinfo{display:none;}}
- 
+
 /* ─── MAIN ─── */
 .main{padding:48px 28px 80px;max-width:700px;}
 @media(min-width:640px){.main{padding:52px 48px 80px;}}
 .form-step{display:none;animation:stepIn 0.45s var(--ease) both;}
 .form-step.active{display:block;}
 @keyframes stepIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
- 
+
 /* ─── STEP HEADER ─── */
 .step-tag{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:600;letter-spacing:0.11em;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
 .step-tag::before{content:'';display:block;width:20px;height:2px;background:var(--orange);border-radius:1px;}
 .step-h{font-family:'Syne',sans-serif;font-size:clamp(1.65rem,3.5vw,2.1rem);font-weight:700;color:var(--ink);line-height:1.2;margin-bottom:10px;}
 .step-desc{font-size:14.5px;color:var(--ink-muted);margin-bottom:36px;line-height:1.7;max-width:520px;}
- 
+
 /* ─── QUESTION ─── */
 .qb{margin-bottom:28px;}
 .qlabel{display:block;font-size:14.5px;font-weight:500;color:var(--ink);margin-bottom:13px;line-height:1.5;}
 .qlabel .qnum{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:var(--navy);color:white;border-radius:50%;font-size:11px;font-weight:700;margin-right:9px;flex-shrink:0;vertical-align:middle;position:relative;top:-1px;}
- 
+
 /* ─── OPTIONS ─── */
 .opts{display:grid;gap:7px;}
 .opts.g2{grid-template-columns:1fr 1fr;}
@@ -106,7 +106,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .omark{width:16px;height:16px;border:1.5px solid var(--border-md);border-radius:50%;flex-shrink:0;margin-top:1px;transition:all 0.22s var(--ease);display:flex;align-items:center;justify-content:center;background:white;}
 .oc input:checked+label .omark{background:var(--orange);border-color:var(--orange);}
 .oc input:checked+label .omark::after{content:'';display:block;width:5px;height:5px;background:white;border-radius:50%;}
- 
+
 /* ─── SCALE ─── */
 .scale-box{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
 .scale-ends{display:flex;justify-content:space-between;font-size:11.5px;color:var(--ink-muted);margin-bottom:12px;font-weight:500;}
@@ -116,7 +116,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .so label{display:flex;align-items:center;justify-content:center;height:40px;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;font-size:13px;font-weight:600;color:var(--ink-muted);transition:all 0.25s var(--ease);background:var(--surface);}
 .so label:hover{border-color:var(--orange-bdr);color:var(--orange);background:var(--orange-dim);}
 .so input:checked+label{background:var(--orange);border-color:var(--orange);color:white;}
- 
+
 /* ─── TEXTAREA / INPUT ─── */
 .tfield{width:100%;background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius);padding:13px 15px;font-family:'IBM Plex Sans',sans-serif;font-size:14px;color:var(--ink);outline:none;resize:vertical;transition:border-color 0.25s var(--ease);min-height:88px;line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,0.04);}
 .tfield::placeholder{color:var(--ink-faint);}
@@ -129,7 +129,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .fwrap{display:flex;flex-direction:column;gap:6px;}
 .flbl{font-size:11.5px;font-weight:600;color:var(--ink-soft);letter-spacing:0.05em;text-transform:uppercase;}
 .req{color:var(--orange);}
- 
+
 /* ─── SCENARIO ─── */
 .scene{background:var(--white);border:1.5px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,0.05);}
 .scene-top{padding:16px 20px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,rgba(11,37,69,0.03) 0%,rgba(241,90,34,0.03) 100%);}
@@ -137,16 +137,16 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .scene-label::before{content:'';display:block;width:12px;height:2px;background:var(--orange);border-radius:1px;}
 .scene-q{font-size:13.5px;color:var(--ink-soft);line-height:1.6;}
 .scene-body{padding:14px 18px;}
- 
+
 /* ─── REFLECT CARD ─── */
 .reflect-card{background:linear-gradient(135deg,rgba(11,37,69,0.04),rgba(241,90,34,0.03));border:1px solid rgba(11,37,69,0.1);border-left:3px solid var(--navy);border-radius:var(--radius);padding:15px 17px;font-size:13px;color:var(--ink-soft);line-height:1.6;margin-bottom:12px;}
 .reflect-card strong{color:var(--navy);font-weight:600;}
- 
+
 /* ─── DIVIDER ─── */
 .qdiv{display:flex;align-items:center;gap:12px;margin:32px 0 20px;}
 .qdiv-label{font-size:10.5px;font-weight:700;letter-spacing:0.11em;text-transform:uppercase;color:var(--navy-soft);white-space:nowrap;}
 .qdiv-line{flex:1;height:1px;background:var(--border);}
- 
+
 /* ─── NAV BUTTONS ─── */
 .navrow{display:flex;align-items:center;gap:10px;margin-top:36px;padding-top:24px;border-top:1px solid var(--border);}
 .btn{padding:13px 24px;border-radius:var(--radius);font-family:'IBM Plex Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;border:none;display:inline-flex;align-items:center;gap:8px;transition:all 0.25s var(--ease);}
@@ -157,10 +157,10 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .btn-next:active{transform:translateY(0);}
 .btn-navy{background:var(--navy);color:white;flex:1;justify-content:center;}
 .btn-navy:hover{background:var(--navy-mid);transform:translateY(-1px);box-shadow:0 6px 20px rgba(11,37,69,0.28);}
- 
+
 /* ─── PRIVACY NOTE ─── */
 .privacy-note{display:flex;gap:11px;align-items:flex-start;padding:13px 15px;background:rgba(11,37,69,0.04);border:1px solid rgba(11,37,69,0.1);border-left:3px solid var(--navy);border-radius:var(--radius);font-size:12.5px;color:var(--ink-soft);line-height:1.55;margin-bottom:28px;}
- 
+
 /* ─── LGPD ─── */
 .lgpd-block {
   background: rgba(11,37,69,0.04);
@@ -211,7 +211,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
   color: var(--navy);
   font-weight: 600;
 }
- 
+
 /* ─── SUBMIT ─── */
 .btn-submit{background:var(--navy);color:white;width:100%;justify-content:center;padding:16px;font-size:15px;border-radius:10px;position:relative;overflow:hidden;}
 .btn-submit::before{content:'';position:absolute;right:-20px;top:-20px;width:80px;height:80px;background:rgba(241,90,34,0.15);border-radius:50%;transition:transform 0.4s var(--ease);}
@@ -222,7 +222,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .btn-submit.loading .btn-text{display:none;}
 .btn-submit.loading .spinner{display:inline-block;}
 @keyframes spin{to{transform:rotate(360deg);}}
- 
+
 /* ─── SUCCESS ─── */
 .success-screen{display:none;text-align:center;padding:60px 20px;animation:stepIn 0.6s var(--ease) both;}
 .success-screen.show{display:block;}
@@ -231,13 +231,13 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
 .success-bar{width:48px;height:3px;background:var(--orange);border-radius:2px;margin:16px auto 20px;}
 .success-screen p{font-size:15px;color:var(--ink-muted);line-height:1.75;max-width:420px;margin:0 auto;}
 .success-screen strong{color:var(--navy);}
- 
+
 .footer{text-align:center;font-size:11.5px;color:var(--ink-faint);padding-top:28px;border-top:1px solid var(--border);margin-top:48px;line-height:1.6;}
 </style>
 </head>
 <body>
 <div class="layout">
- 
+
 <!-- ═══════ SIDEBAR ═══════ -->
 <aside class="sidebar">
   <div class="sidebar-badge"><span class="badge-dot"></span>Processo Seletivo Confidencial</div>
@@ -256,20 +256,20 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
     <div class="snav-item"><span class="snav-num"><span class="snav-n">5</span></span>Seus Dados</div>
   </nav>
 </aside>
- 
+
 <!-- ═══════ MAIN ═══════ -->
 <main class="main">
   <div class="mobile-progress">
     <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
     <span class="prog-label" id="progLabel">Bloco 1 de 5</span>
   </div>
- 
+
   <!-- ══════ BLOCO 1 ══════ -->
   <div class="form-step active" id="step-0">
     <div class="step-tag">Bloco 1 de 5</div>
     <h1 class="step-h">Perfil<br>Profissional</h1>
     <p class="step-desc">Queremos entender sua trajetória e como você se posiciona hoje na área de Pessoas.</p>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">1</span>Há quanto tempo você atua em RH estratégico?</label>
       <div class="opts g2">
@@ -279,7 +279,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q1" id="q1d" value="Mais de 10 anos"><label for="q1d"><span class="omark"></span>Mais de 10 anos</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">2</span>Já liderou equipe de RH formalmente?</label>
       <div class="opts">
@@ -289,7 +289,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q2" id="q2d" value="Ainda não liderei equipe"><label for="q2d"><span class="omark"></span>Ainda não liderei equipe</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">3</span>Já estruturou uma área de RH do zero ou em fase inicial?</label>
       <div class="opts">
@@ -299,7 +299,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q3" id="q3d" value="Não tenho essa experiência"><label for="q3d"><span class="omark"></span>Não tenho essa experiência</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">4</span>Como você se posiciona hoje como profissional de Pessoas?</label>
       <div class="opts">
@@ -308,18 +308,18 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q4" id="q4c" value="Majoritariamente operacional, em transição para o estratégico"><label for="q4c"><span class="omark"></span>Majoritariamente operacional, em transição para o estratégico</label></div>
       </div>
     </div>
- 
+
     <div class="navrow">
       <button class="btn btn-next" onclick="nextStep()">Próximo bloco &#8594;</button>
     </div>
   </div>
- 
+
   <!-- ══════ BLOCO 2 ══════ -->
   <div class="form-step" id="step-1">
     <div class="step-tag">Bloco 2 de 5</div>
     <h1 class="step-h">Cultura e<br>Comportamento</h1>
     <p class="step-desc">Este bloco mapeia como você age no dia a dia diante de desafios, mudanças e oportunidades.</p>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">5</span>Você está em um projeto importante e encontra um obstáculo significativo no meio do caminho. Qual é sua reação natural?</label>
       <div class="opts">
@@ -329,7 +329,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q5" id="q5d" value="Escalo para a liderança. Preciso de direcionamento antes de avançar" data-disc="S:2"><label for="q5d"><span class="omark"></span>Escalo para a liderança. Preciso de direcionamento antes de avançar</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">6</span>Quando a empresa muda uma diretriz que você ajudou a construir, como você reage?</label>
       <div class="opts">
@@ -339,7 +339,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q6" id="q6d" value="Envolvo a equipe na transição para que a mudança seja construída junto" data-disc="I:2,S:1"><label for="q6d"><span class="omark"></span>Envolvo a equipe na transição para que a mudança seja construída junto</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">7</span>Diante de uma demanda urgente fora do seu escopo habitual, você:</label>
       <div class="opts">
@@ -349,12 +349,12 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q7" id="q7d" value="Consulta a liderança antes de qualquer movimentação" data-disc="S:2"><label for="q7d"><span class="omark"></span>Consulta a liderança antes de qualquer movimentação</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">8</span>Descreva brevemente uma iniciativa que você criou do zero na sua trajetória. O que te motivou, o que foi difícil e o que resultou.</label>
       <textarea class="tfield" name="q8_iniciativa" placeholder="Conte com suas próprias palavras. Não precisa ser perfeito, precisa ser real."></textarea>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">9</span>Quando você assume um compromisso, qual é o seu nível de persistência para honrá-lo mesmo diante de adversidades?</label>
       <div class="scale-box">
@@ -368,19 +368,19 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         </div>
       </div>
     </div>
- 
+
     <div class="navrow">
       <button class="btn btn-back" onclick="prevStep()">&#8592; Voltar</button>
       <button class="btn btn-next" onclick="nextStep()">Próximo bloco &#8594;</button>
     </div>
   </div>
- 
+
   <!-- ══════ BLOCO 3 ══════ -->
   <div class="form-step" id="step-2">
     <div class="step-tag">Bloco 3 de 5</div>
     <h1 class="step-h">Relações e<br>Ética</h1>
     <p class="step-desc">Como você se relaciona com as pessoas, com a verdade e com situações que exigem posicionamento.</p>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">10</span>Um colaborador recém-contratado chega até você em crise. Está se sentindo perdido, sem suporte do gestor e considerando sair nos primeiros 30 dias. O que você faz?</label>
       <div class="opts">
@@ -390,7 +390,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q10" id="q10d" value="Entendo o contexto e calibro se é algo pontual ou sintoma de um problema maior" data-disc="C:2,I:1"><label for="q10d"><span class="omark"></span>Entendo o contexto e calibro se é algo pontual ou sintoma de um problema maior</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">11</span>Você precisa comunicar uma decisão da empresa que sabe que será impopular entre os colaboradores. Como você age?</label>
       <div class="opts">
@@ -400,7 +400,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q11" id="q11d" value="Delego para o gestor. Ele tem mais contexto com a equipe" data-disc="S:1"><label for="q11d"><span class="omark"></span>Delego para o gestor. Ele tem mais contexto com a equipe</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">12</span>Você descobre que uma prática adotada pela empresa, embora legal, viola o que você entende como ética profissional. Como age?</label>
       <div class="opts">
@@ -410,7 +410,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q12" id="q12d" value="Avalio se é uma linha que não posso cruzar e repenso meu vínculo se necessário" data-disc="D:2,C:1"><label for="q12d"><span class="omark"></span>Avalio se é uma linha que não posso cruzar e repenso meu vínculo se necessário</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">13</span>Para você, qual é o verdadeiro cliente do RH dentro de uma empresa?</label>
       <div class="opts">
@@ -420,24 +420,24 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         <div class="oc"><input type="radio" name="q13" id="q13d" value="A liderança. RH é um braço estratégico da gestão" data-disc="D:1,C:1"><label for="q13d"><span class="omark"></span>A liderança. RH é um braço estratégico da gestão</label></div>
       </div>
     </div>
- 
+
     <div class="qb">
       <label class="qlabel"><span class="qnum">14</span>Você já teve que dar um feedback difícil para alguém hierarquicamente superior a você? Como foi e o que aprendeu?</label>
       <textarea class="tfield" name="q14_feedback" placeholder="Conte com suas próprias palavras."></textarea>
     </div>
- 
+
     <div class="navrow">
       <button class="btn btn-back" onclick="prevStep()">&#8592; Voltar</button>
       <button class="btn btn-next" onclick="nextStep()">Próximo bloco &#8594;</button>
     </div>
   </div>
- 
+
   <!-- ══════ BLOCO 4 ══════ -->
   <div class="form-step" id="step-3">
     <div class="step-tag">Bloco 4 de 5</div>
     <h1 class="step-h">Cenários<br>Práticos</h1>
     <p class="step-desc">Situações reais. Escolha a resposta que mais se aproxima da sua ação natural, não da resposta ideal.</p>
- 
+
     <div class="scene">
       <div class="scene-top">
         <div class="scene-label">Cenário A — Tomada de Decisão</div>
@@ -452,7 +452,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         </div>
       </div>
     </div>
- 
+
     <div class="scene">
       <div class="scene-top">
         <div class="scene-label">Cenário B — Execução sob Pressão</div>
@@ -467,7 +467,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         </div>
       </div>
     </div>
- 
+
     <div class="scene">
       <div class="scene-top">
         <div class="scene-label">Cenário C — Influência sem Autoridade</div>
@@ -482,7 +482,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         </div>
       </div>
     </div>
- 
+
     <div class="scene">
       <div class="scene-top">
         <div class="scene-label">Cenário D — Experiência do Colaborador</div>
@@ -497,29 +497,29 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
         </div>
       </div>
     </div>
- 
+
     <div class="qb" style="margin-top:28px;">
       <div class="reflect-card"><strong>Reflexão final.</strong> Não há opções para essa. Queremos sua voz direta.</div>
       <label class="qlabel"><span class="qnum">15</span>Na sua visão, o que diferencia um RH que realmente move a cultura de um RH que apenas a descreve?</label>
       <textarea class="tfield" name="q15_cultura" placeholder="Escreva com autenticidade. Essa é a pergunta mais importante deste formulário."></textarea>
     </div>
- 
+
     <div class="navrow">
       <button class="btn btn-back" onclick="prevStep()">&#8592; Voltar</button>
       <button class="btn btn-next" onclick="calcDiscThenNext()">Próximo bloco &#8594;</button>
     </div>
   </div>
- 
+
   <!-- ══════ BLOCO 5 — DADOS ══════ -->
   <div class="form-step" id="step-4">
     <div class="step-tag">Bloco 5 de 5</div>
     <h1 class="step-h">Seus<br>Dados</h1>
     <p class="step-desc">Para continuidade do processo e contato pela equipe de seleção.</p>
- 
+
     <div class="privacy-note">
       Suas informações são tratadas com total sigilo e usadas exclusivamente neste processo seletivo. A empresa será revelada na próxima etapa.
     </div>
- 
+
     <form id="fitForm" action="https://formspree.io/f/xjgpvvgw" method="POST" novalidate>
       <input type="hidden" name="_subject" value="Novo Fit Cultural - Coordenador de RH Estrategico">
       <input type="hidden" name="_language" value="pt">
@@ -544,9 +544,9 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
       <input type="hidden" name="B4_Q15_rh_cultura"            id="h_q15">
       <input type="hidden" name="DISC_dominante"               id="h_disc_dom">
       <input type="hidden" name="DISC_scores_D_I_S_C"          id="h_disc_scores">
- 
+
       <div class="qdiv"><span class="qdiv-label">Informações Pessoais</span><div class="qdiv-line"></div></div>
- 
+
       <div class="qb">
         <div class="igrid">
           <div class="fwrap"><label class="flbl">Nome completo <span class="req">*</span></label><input type="text" name="nome" class="ifield" id="f_nome" placeholder="Seu nome completo"></div>
@@ -562,9 +562,9 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
       <div class="qb">
         <div class="fwrap"><label class="flbl">LinkedIn</label><input type="url" name="linkedin" class="ifield" placeholder="https://linkedin.com/in/seu-perfil"></div>
       </div>
- 
+
       <div class="qdiv"><span class="qdiv-label">Formação</span><div class="qdiv-line"></div></div>
- 
+
       <div class="qb">
         <label class="qlabel"><span class="qnum">16</span>Formação mais alta concluída</label>
         <div class="opts g2">
@@ -574,18 +574,18 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
           <div class="oc"><input type="radio" name="formacao" id="f4" value="Doutorado"><label for="f4"><span class="omark"></span>Doutorado</label></div>
         </div>
       </div>
- 
+
       <div class="qdiv"><span class="qdiv-label">Encerramento</span><div class="qdiv-line"></div></div>
- 
+
       <div class="qb">
         <label class="qlabel"><span class="qnum">17</span>Há algo sobre sua trajetória ou motivação que não foi contemplado e que você considera importante compartilhar?</label>
         <textarea name="comentario_final" class="tfield" rows="3" placeholder="Espaço livre."></textarea>
       </div>
- 
+
       <div class="navrow" style="margin-bottom:16px;">
         <button class="btn btn-back" type="button" onclick="prevStep()">&#8592; Voltar</button>
       </div>
- 
+
       <!-- LGPD -->
       <div class="lgpd-block">
         <label class="lgpd-label" for="lgpd_consent">
@@ -599,7 +599,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
           </span>
         </label>
       </div>
- 
+
       <button type="submit" class="btn btn-submit" id="submitBtn">
         <span class="btn-text">Enviar minha avaliação</span>
         <span class="spinner"></span>
@@ -610,7 +610,7 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
       </p>
     </form>
   </div>
- 
+
   <!-- SUCCESS -->
   <div class="success-screen" id="success">
     <div class="success-mark">&#10003;</div>
@@ -618,13 +618,13 @@ body{background:var(--off);color:var(--ink);font-family:'IBM Plex Sans',sans-ser
     <div class="success-bar"></div>
     <p>Obrigado(a) pela seriedade com que conduziu esta etapa.<br><br>Nossa equipe analisará sua avaliação e, caso haja aderência ao perfil, entraremos em contato em até <strong>5 dias úteis</strong> pelo e-mail ou WhatsApp informados.</p>
   </div>
- 
+
   <div class="footer" id="footerNote">
     Processo seletivo confidencial &nbsp;&middot;&nbsp; Coordenador(a) de RH Estratégico &nbsp;&middot;&nbsp; Rio de Janeiro
   </div>
 </main>
 </div>
- 
+
 <script>
 /* ══════════════════════════════════════
    DISC PROFILES (only used to populate hidden fields)
@@ -635,15 +635,15 @@ const DISC_PROFILES = {
   S: { name: 'Estabilidade' },
   C: { name: 'Conformidade' }
 };
- 
+
 /* ══════════════════════════════════════
    NAVIGATION
 ══════════════════════════════════════ */
 const STEP_IDS = ['step-0','step-1','step-2','step-3','step-4'];
 let current = 0;
- 
+
 function getStepEl(idx){ return document.getElementById(STEP_IDS[idx]); }
- 
+
 function goTo(idx){
   getStepEl(current).classList.remove('active');
   current = idx;
@@ -651,15 +651,15 @@ function goTo(idx){
   updateUI();
   window.scrollTo({top:0, behavior:'smooth'});
 }
- 
+
 function nextStep(){ if(current < STEP_IDS.length - 1) goTo(current + 1); }
 function prevStep(){ if(current > 0) goTo(current - 1); }
- 
+
 function calcDiscThenNext(){
   buildDisc();
   nextStep();
 }
- 
+
 function updateUI(){
   const total = STEP_IDS.length;
   const pct = Math.round((current + 1) / total * 100);
@@ -671,7 +671,7 @@ function updateUI(){
     if(i < current)   el.classList.add('done');
   });
 }
- 
+
 /* ══════════════════════════════════════
    DISC — só preenche campos hidden
 ══════════════════════════════════════ */
@@ -696,14 +696,14 @@ function buildDisc(){
   var dom = 'D';
   var maxVal = 0;
   Object.keys(scores).forEach(function(k){ if(scores[k] > maxVal){ maxVal = scores[k]; dom = k; } });
- 
+
   var hDom = document.getElementById('h_disc_dom');
   var hScores = document.getElementById('h_disc_scores');
   if(hDom) hDom.value = dom + ' (' + DISC_PROFILES[dom].name + ')';
   if(hScores) hScores.value = 'D:' + scores.D + ' I:' + scores.I + ' S:' + scores.S + ' C:' + scores.C
     + ' | D:' + pcts.D + '% I:' + pcts.I + '% S:' + pcts.S + '% C:' + pcts.C + '%';
 }
- 
+
 /* ══════════════════════════════════════
    COLLECT — copia respostas fora do form para hidden fields
 ══════════════════════════════════════ */
@@ -732,7 +732,7 @@ function collectAnswers(){
     if(el && hf) hf.value = el.value;
   });
 }
- 
+
 /* ══════════════════════════════════════
    VALIDATE campos obrigatórios do bloco 5
 ══════════════════════════════════════ */
@@ -743,12 +743,12 @@ function validateForm(){
   var whatsapp = document.getElementById('f_whatsapp');
   var pretensao = document.getElementById('f_pretensao');
   var lgpd = document.getElementById('lgpd_consent');
- 
+
   if(!nome || !nome.value.trim()){ errors.push('Nome completo obrigatório.'); if(nome) nome.focus(); }
   else if(!email || !email.value.trim() || email.value.indexOf('@') < 0){ errors.push('E-mail válido obrigatório.'); if(email) email.focus(); }
   else if(!whatsapp || !whatsapp.value.trim()){ errors.push('WhatsApp obrigatório.'); if(whatsapp) whatsapp.focus(); }
   else if(!pretensao || !pretensao.value.trim()){ errors.push('Pretensão salarial obrigatória.'); if(pretensao) pretensao.focus(); }
- 
+
   if(!lgpd || !lgpd.checked){
     errors.push('Você precisa autorizar o uso dos dados (LGPD) para prosseguir.');
     var lgpdBlock = document.querySelector('.lgpd-block');
@@ -759,31 +759,31 @@ function validateForm(){
   }
   return errors;
 }
- 
+
 /* ══════════════════════════════════════
    SUBMIT
 ══════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', function(){
   var form = document.getElementById('fitForm');
   if(!form){ console.error('fitForm nao encontrado'); return; }
- 
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     e.stopPropagation();
- 
+
     // 1. Validação manual
     var errors = validateForm();
     if(errors.length > 0){
       alert(errors.join('\n'));
       return;
     }
- 
+
     // 2. Coleta respostas dos steps anteriores
     collectAnswers();
- 
+
     // 3. Calcula DISC silenciosamente
     buildDisc();
- 
+
     // 4. Adiciona _replyto dinamicamente
     var emailVal = document.getElementById('f_email').value;
     var existing = form.querySelector('input[name="_replyto"]');
@@ -795,13 +795,13 @@ document.addEventListener('DOMContentLoaded', function(){
       rt.value = emailVal;
       form.appendChild(rt);
     }
- 
+
     // 5. Envia
     var btn = document.getElementById('submitBtn');
     btn.classList.add('loading');
- 
+
     var data = new FormData(form);
- 
+
     fetch(form.action, {
       method: 'POST',
       body: data,
@@ -841,4 +841,3 @@ document.addEventListener('DOMContentLoaded', function(){
 </script>
 </body>
 </html>
- 
